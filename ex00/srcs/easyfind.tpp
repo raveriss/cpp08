@@ -28,6 +28,8 @@
 
 /* Inclure les fichiers de la STL nécessaires */
 #include <algorithm>
+
+/* Inclure les fichiers typeinfo pour la gestion des types */
 #include <typeinfo>
 
 /* Macro for asserting test results and displaying appropriate messages */

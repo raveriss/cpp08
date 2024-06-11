@@ -13,9 +13,6 @@
 /* Directive pour éviter les inclusions multiples d'un fichier d'en-tête */
 #pragma once
 
-/* Inclure les fichiers stdexcept */
-#include <stdexcept>
-
 /* Inclure les fichiers de la STL nécessaires */
 #include <iterator>
 
