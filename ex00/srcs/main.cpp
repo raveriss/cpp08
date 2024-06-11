@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 00:02:28 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/12 01:09:37 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/12 01:17:45 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -627,50 +627,60 @@ int main(int argc, char *argv[])
     /* Check if the program is run with the argument "tester" */
 	else if (argc == 2 && strcmp(argv[1], "tester") == 0)
 	{
+        /* Print the title of the test optional */
 		std::cout << CYAN << "\n/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */" << NC << std::endl;
 		std::cout << CYAN << "/*                                 OPTIONNEL                                  */" << NC << std::endl;
 		std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */\n" << NC << std::endl;
 
+        /* Print the title of the test easyfind present */
 		std::cout << MAGENTA << "TEST EASYFIND PRESENT" << NC << std::endl;
 
         /* Test the easyfind function with a present element */
 		testEasyFindPresent();
 
+        /* Print the title of the test easyfind absent */
 		std::cout << std::endl << MAGENTA << "TEST EASYFIND ABSENT" << NC << std::endl;
 
         /* Test the easyfind function with an absent element */
 		testEasyFindAbsent();
 
+        /* Print the title of the test easyfind with list */
 		std::cout << std::endl << MAGENTA << "TEST EASYFIND WITH LIST" << NC << std::endl;
 
         /* Test the easyfind function with a list */
 		testEasyFindList();
 
+        /* Print the title of the test easyfind with deque */
 		std::cout << std::endl << MAGENTA << "TEST EASYFIND WITH DEQUE" << NC << std::endl;
 
         /* Test the easyfind function with a deque */
 		testEasyFindDeque();
 
+        /* Print the title of the test easyfind with set */
 		std::cout << std::endl << MAGENTA << "TEST EASYFIND WITH SET" << NC << std::endl;
 
         /* Test the easyfind function with a set */
 		testEasyFindSet();
 
+        /* Print the title of the test easyfind with empty container */
 		std::cout << std::endl << MAGENTA << "TEST EASYFIND WITH EMPTY CONTAINER" << NC << std::endl;
 
         /* Test the easyfind function with an empty container */
 		testEasyFindEmpty();
 
+        /* Print the title of the test easyfind with large container */
 		std::cout << std::endl << MAGENTA << "TEST EASYFIND WITH LARGE CONTAINER" << NC << std::endl;
 
         /* Test the easyfind function with a large container */
 		testEasyFindLargeContainer();
 
+        /* print the title of the test easyfind with negative and zero */
 		std::cout << std::endl << MAGENTA << "TEST EASYFIND WITH NEGATIVE AND ZERO" << NC << std::endl;
 
         /* Test the easyfind function with negative and zero elements */
 		testEasyFindNegativeAndZero();
 
+        /* Print the title of the test easyfind with multiple occurrences */
 		std::cout << std::endl << MAGENTA << "TEST EASYFIND WITH MULTIPLE OCCURRENCES" << NC << std::endl;
 
         /* Test the easyfind function with multiple occurrences of an element */
