@@ -447,35 +447,35 @@ int main(int argc, char *argv[])
 	}
 	else if (argc == 2 && strcmp(argv[1], "tester") == 0)
 	{
-		std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */" << NC << std::endl;
+		std::cout << CYAN << "\n/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */" << NC << std::endl;
 		std::cout << CYAN << "/*                                 OPTIONNEL                                  */" << NC << std::endl;
 		std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */\n" << NC << std::endl;
 
-		std::cout << MAGENTA << "TEST EASY FIND PRESENT" << NC << std::endl;
+		std::cout << MAGENTA << "TEST EASYFIND PRESENT" << NC << std::endl;
 		testEasyFindPresent();
 
-		std::cout << std::endl << MAGENTA << "TEST EASY FIND ABSENT" << NC << std::endl;
+		std::cout << std::endl << MAGENTA << "TEST EASYFIND ABSENT" << NC << std::endl;
 		testEasyFindAbsent();
 
-		std::cout << std::endl << MAGENTA << "TEST EASY FIND WITH LIST" << NC << std::endl;
+		std::cout << std::endl << MAGENTA << "TEST EASYFIND WITH LIST" << NC << std::endl;
 		testEasyFindList();
 
-		std::cout << std::endl << MAGENTA << "TEST EASY FIND WITH DEQUE" << NC << std::endl;
+		std::cout << std::endl << MAGENTA << "TEST EASYFIND WITH DEQUE" << NC << std::endl;
 		testEasyFindDeque();
 
-		std::cout << std::endl << MAGENTA << "TEST EASY FIND WITH SET" << NC << std::endl;
+		std::cout << std::endl << MAGENTA << "TEST EASYFIND WITH SET" << NC << std::endl;
 		testEasyFindSet();
 
-		std::cout << std::endl << MAGENTA << "TEST EASY FIND WITH EMPTY CONTAINER" << NC << std::endl;
+		std::cout << std::endl << MAGENTA << "TEST EASYFIND WITH EMPTY CONTAINER" << NC << std::endl;
 		testEasyFindEmpty();
 
-		std::cout << std::endl << MAGENTA << "TEST EASY FIND WITH LARGE CONTAINER" << NC << std::endl;
+		std::cout << std::endl << MAGENTA << "TEST EASYFIND WITH LARGE CONTAINER" << NC << std::endl;
 		testEasyFindLargeContainer();
 
-		std::cout << std::endl << MAGENTA << "TEST EASY FIND WITH NEGATIVE AND ZERO" << NC << std::endl;
+		std::cout << std::endl << MAGENTA << "TEST EASYFIND WITH NEGATIVE AND ZERO" << NC << std::endl;
 		testEasyFindNegativeAndZero();
 
-		std::cout << std::endl << MAGENTA << "TEST EASY FIND WITH MULTIPLE OCCURRENCES" << NC << std::endl;
+		std::cout << std::endl << MAGENTA << "TEST EASYFIND WITH MULTIPLE OCCURRENCES" << NC << std::endl;
 		testEasyFindMultipleOccurrences();
 	}
 	else
