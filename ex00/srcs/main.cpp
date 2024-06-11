@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 00:02:28 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/12 01:17:45 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/12 01:18:55 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -575,6 +575,7 @@ int main(int argc, char *argv[])
     /* Check if the program is run without any arguments */
 	if (argc == 1)
 	{
+        /* Print the title of the test mandatory */
 		std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */" << NC << std::endl;
 		std::cout << CYAN << "/*                                 MANDATORY                                  */" << NC << std::endl;
 		std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */\n" << NC << std::endl;
