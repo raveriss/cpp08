@@ -1,10 +1,37 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/12 00:02:28 by raveriss          #+#    #+#             */
+/*   Updated: 2024/06/12 01:09:37 by raveriss         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/* Inclusion de la bibliothèque standard pour std::cout */
 #include <iostream>
+
+/* Inclusion de la bibliothèque standard pour std::vector */
 #include <vector>
+
+/* Inclusion de la bibliothèque standard pour std::list */
 #include <list>
+
+/* Inclusion de la bibliothèque standard pour std::deque */
 #include <deque>
+
+/* Inclusion de la bibliothèque standard pour std::set */
 #include <set>
+
+/* Inclusion de la bibliothèque standard pour std::ostringstream */
 #include <sstream>
+
+/* Inclusion de la bibliothèque standard pour std::strcmp */
 #include <cstring>
+
+/* Inclusion de la bibliothèque standard pour limites numériques */
 #include <limits>
 
 /* Inclusion du fichier d'en-tête easyfind.hpp */
@@ -26,58 +53,102 @@
 	else { std::cout << RED "[TEST FAILED]" << NC << " " << message << std::endl; }
 
 /**
- * @brief Print the first three and last three elements of a container
- */
-template<typename T>
-void printLargeContainer(const T& container)
-{
-    typename T::const_iterator it = container.begin();
-    typename T::const_iterator end = container.end();
-    size_t size = container.size();
-    size_t i = 0;
-
-    std::cout << "[ ";
-
-    // Print first three elements
-    for (i = 0; i < 3 && it != end; ++i, ++it)
-    {
-        std::cout << *it << ", ";
-    }
-
-    // Print ellipsis if there are more than 6 elements
-    if (size > 6)
-    {
-        std::cout << "..., ";
-        std::advance(it, size - 6); // Move iterator to the 4th element from the end
-    }
-
-    // Print last three elements
-    for (; it != end; ++it)
-    {
-        std::cout << *it;
-        if (it != --end)
-            std::cout << ", ";
-    }
-
-    std::cout << " ]" << std::endl;
-}
-
-/**
  * @brief Print the elements of a container
  */
 template<typename T>
 void printContainer(const T& container)
 {
+    /* Initialize an iterator to the beginning of the container */
 	typename T::const_iterator it = container.begin();
+    
+    /* Print the opening bracket */
 	std::cout << "[ ";
+
+    /* Print all elements */
 	while (it != container.end())
     {
+        /* Print the element */
 		std::cout << *it;
+        
+        /* Move the iterator to the next element */
 		++it;
+
+        /* Print a comma if the iterator is not pointing to the last element */
 		if (it != container.end())
 			std::cout << ", ";
 	}
+
+    /* Print the closing bracket */
 	std::cout << " ]" << std::endl;
+}
+
+/**
+ * @brief Print the first three and last three elements of a container
+ */
+template<typename T>
+void printLargeContainer(const T& container)
+{
+    /* Initialize an iterator to the beginning of the container */
+    typename T::const_iterator it = container.begin();
+
+    /* Get the size of the container */
+    size_t size = container.size();
+
+    /* Initialize a counter */
+    size_t i = 0;
+
+    /* Print the opening bracket */
+    std::cout << "[ ";
+
+    /* Check if the size of the container is less than or equal to 6 */
+    if (size <= 6)
+    {
+        /* Print all elements */
+        for (; it != container.end(); ++it)
+        {
+            /* Print the element */
+            std::cout << *it;
+            
+            /* Print a comma if the iterator is not pointing to the last element */
+            if (it != --container.end())
+                std::cout << ", ";
+        }
+    }
+    else
+    {
+        /* Print first three elements */
+        for (i = 0; i < 3 && it != container.end(); ++i, ++it)
+        {
+            /* Print the element */
+            std::cout << *it << ", ";
+        }
+
+        /* Print ellipsis */
+        std::cout << "..., ";
+
+        /* Move the iterator to the last three elements */
+        it = container.end();
+
+        /* Move the iterator to the previous element */
+        for (i = 0; i < 3; ++i)
+        {
+            /* Move the iterator to the previous element */
+            --it;
+        }
+
+        /* Print last three elements */
+        for (; it != container.end(); ++it)
+        {
+            /* Print the element */
+            std::cout << *it;
+            /* Print a comma if the iterator is not pointing to the last element */
+            if (it != --container.end())
+                std::cout << ", ";
+        }
+    }
+    
+    /* Print the closing bracket */
+    std::cout << " ]" << std::endl;
 }
 
 /*
@@ -109,21 +180,33 @@ nombreuses fonctions pour manipuler des chaînes de texte.
  */
 void testEasyFindPresent()
 {
+    /* Declare a vector of size 10 */
 	std::vector<int> vec(10);
+
+    /* Fill the vector with elements from 0 to 9 */
 	for (int i = 0; i < 10; ++i)
     {
+        /* Add the element to the vector */
 		vec[i] = i;
 	}
 
+    /* Print the elements of the vector */
 	printContainer(vec);
 
+    /* Try to find the element 5 in the vector */
 	try
     {
+        /* Search for the element 5 in the vector */
 		std::vector<int>::iterator it = easyfind(vec, 5);
+
+        /* Check if the iterator points is pointing to the correct element */
 		ASSERT_TEST(*it == 5, "Found the element 5 in the vector");
 	}
+    
+    /* Catch any exceptions */
     catch (std::exception &e)
     {
+        /* If the element is not found, the test should fail */
 		ASSERT_TEST(false, e.what());
 	}
 }
@@ -133,21 +216,33 @@ void testEasyFindPresent()
  */
 void testEasyFindAbsent()
 {
+    /* Declare a vector of size 10 */
 	std::vector<int> vec(10);
+
+    /* Fill the vector with elements from 0 to 9 */
 	for (int i = 0; i < 10; ++i)
     {
+        /* Add the element to the vector */
 		vec[i] = i;
 	}
 
+    /* Print the elements of the vector */
 	printContainer(vec);
 
+    /* Try to find the element 20 in the vector */
 	try
     {
+        /* Search for the element 20 in the vector */
 		easyfind(vec, 20);
+
+        /* If the element is found, the test should fail */
 		ASSERT_TEST(false, "Element 20 should not be found in the vector");
 	}
+
+    /* Catch any exceptions */
     catch (std::exception &e)
     {
+        /* If the element is not found, the test should pass */
 		ASSERT_TEST(true, "Correctly threw exception when element 20 was not found");
 	}
 }
@@ -157,31 +252,50 @@ void testEasyFindAbsent()
  */
 void testEasyFindList()
 {
+    /* Declare a list of integers */
 	std::list<int> lst;
+    
+    /* Fill the list with elements from 0 to 9 */
 	for (int i = 0; i < 10; ++i)
     {
+        /* Add the element to the list */
 		lst.push_back(i);
 	}
 
+    /* Print the elements of the list */
 	printContainer(lst);
 
+    /* Try to find the element 3 in the list */
 	try
     {
+        /* Search for the element 3 in the list */
 		std::list<int>::iterator it = easyfind(lst, 3);
+
+        /* Check if the iterator points it pointing to the correct element */
 		ASSERT_TEST(*it == 3, "Found the element 3 in the list");
 	}
+
+    /* Catch any exceptions */
     catch (std::exception &e)
     {
+        /* If the element is not found, the test should fail */
 		ASSERT_TEST(false, e.what());
 	}
 
+    /* Try to find the element 30 in the list */
 	try
     {
+        /* Search for the element 30 in the list */
 		easyfind(lst, 30);
+
+        /* If the element is found, the test should fail */
 		ASSERT_TEST(false, "Element 30 should not be found in the list");
 	}
+
+    /* Catch any exceptions */
     catch (std::exception &e)
     {
+        /* If the element is not found, the test should pass */
 		ASSERT_TEST(true, "Correctly threw exception when element 30 was not found");
 	}
 }
@@ -191,31 +305,50 @@ void testEasyFindList()
  */
 void testEasyFindDeque()
 {
+    /* Declare a deque of integers */
 	std::deque<int> deq;
+
+    /* Fill the deque with elements from 0 to 9 */
 	for (int i = 0; i < 10; ++i)
     {
+        /* Add the element to the deque */
 		deq.push_back(i);
 	}
 
+    /* Print the elements of the deque */
 	printContainer(deq);
 
+    /* Try to find the element 7 in the deque */
 	try
     {
+        /* Search for the element 7 in the deque */
 		std::deque<int>::iterator it = easyfind(deq, 7);
+
+        /* Check if the iterator points to the correct element */
 		ASSERT_TEST(*it == 7, "Found the element 7 in the deque");
 	}
+
+    /* Catch any exceptions */
     catch (std::exception &e)
     {
+        /* If the element is not found, the test should fail */
 		ASSERT_TEST(false, e.what());
 	}
 
+    /* Search for the element 70 in the deque */
 	try
     {
+        /* Search for the element 70 in the deque */
 		easyfind(deq, 70);
+
+        /* If the element is found, the test should fail */
 		ASSERT_TEST(false, "Element 70 should not be found in the deque");
 	}
+    
+    /* Catch any exceptions */
     catch (std::exception &e)
     {
+        /* If the element is not found, the test should pass */
 		ASSERT_TEST(true, "Correctly threw exception when element 70 was not found");
 	}
 }
@@ -225,31 +358,50 @@ void testEasyFindDeque()
  */
 void testEasyFindSet()
 {
+    /* Declare a set of integers */
 	std::set<int> st;
+
+    /* Fill the set with elements from 0 to 9 */
 	for (int i = 0; i < 10; ++i)
     {
+        /* Add the element to the set */
 		st.insert(i);
 	}
 
+    /* Print the elements of the set */
 	printContainer(st);
 
+    /* Try to find the element 4 in the set */
 	try
     {
+        /* Search for the element 4 in the set */
 		std::set<int>::iterator it = easyfind(st, 4);
+        
+        /* Check if the iterator points to the correct element */
 		ASSERT_TEST(*it == 4, "Found the element 4 in the set");
 	}
+
+    /* Catch any exceptions */
     catch (std::exception &e)
     {
+        /* If the element is not found, the test should fail */
 		ASSERT_TEST(false, e.what());
 	}
 
+    /* Try to find the element 40 in the set */
 	try
     {
+        /* Search for the element 40 in the set */
 		easyfind(st, 40);
+
+        /* If the element is found, the test should fail */
 		ASSERT_TEST(false, "Element 40 should not be found in the set");
 	}
+
+    /* Catch any exceptions */
     catch (std::exception &e)
     {
+        /* If the element is not found, the test should pass */
 		ASSERT_TEST(true, "Correctly threw exception when element 40 was not found");
 	}
 }
@@ -259,67 +411,28 @@ void testEasyFindSet()
  */
 void testEasyFindEmpty()
 {
+    /* Initialize an vector */
 	std::vector<int> vec;
 
+    /* Print the elements of the empty vector */
 	printContainer(vec);
 
+    /* Try to find the element 1 in the empty vector */
 	try
     {
+        /* Search for the element 1 in the empty vector */
 		easyfind(vec, 1);
+
+        /* If the element is found, the test should fail */
 		ASSERT_TEST(false, "Should not find any element in an empty vector");
 	}
+
+    /* Catch any exceptions */
     catch (std::exception &e)
     {
+        /* If the element is not found, the test should pass */
 		ASSERT_TEST(true, "Correctly threw exception when searching in an empty vector");
 	}
-}
-
-/**
- * @brief Print the first three and last three elements of a container
- */
-template<typename T>
-void printFifoContainer(const T& container)
-{
-    typename T::const_iterator it = container.begin();
-    size_t size = container.size();
-    size_t i = 0;
-
-    std::cout << "[ ";
-
-    if (size <= 6)
-    {
-        // Print all elements if container size is 6 or less
-        for (; it != container.end(); ++it)
-        {
-            std::cout << *it;
-            if (it != --container.end())
-                std::cout << ", ";
-        }
-    }
-    else
-    {
-        // Print first three elements
-        for (i = 0; i < 3 && it != container.end(); ++i, ++it)
-        {
-            std::cout << *it << ", ";
-        }
-        // Print ellipsis
-        std::cout << "..., ";
-        // Print last three elements
-        it = container.end();
-        for (i = 0; i < 3; ++i)
-        {
-            --it;
-        }
-        for (; it != container.end(); ++it)
-        {
-            std::cout << *it;
-            if (it != --container.end())
-                std::cout << ", ";
-        }
-    }
-
-    std::cout << " ]" << std::endl;
 }
 
 /**
@@ -327,21 +440,33 @@ void printFifoContainer(const T& container)
  */
 void testEasyFindLargeContainer()
 {
+    /* Initialize a vector with 1 million elements */
 	std::vector<int> vec(1000000);
+    
+    /* Fill the vector with elements from 0 to 999999 */
 	for (int i = 0; i < 1000000; ++i)
     {
+        /* Add the element to the vector */
 		vec[i] = i;
 	}
 
-	printFifoContainer(vec);
+    /* Print the first three and last three elements of the vector */
+	printLargeContainer(vec);
 
+    /* Try to find the element 999999 in the large vector */
 	try
     {
+        /* Search for the element 999999 in the large vector */
 		std::vector<int>::iterator it = easyfind(vec, 999999);
+        
+        /* Check if the iterator points to the correct element */
 		ASSERT_TEST(*it == 999999, "Found the element 999999 in the large vector");
 	}
+
+    /* Catch any exceptions */
     catch (std::exception &e)
     {
+        /* If the element is not found, the test should fail */
 		ASSERT_TEST(false, e.what());
 	}
 }
@@ -351,28 +476,46 @@ void testEasyFindLargeContainer()
  */
 void testEasyFindNegativeAndZero() 
 {
+    /* Initialize an array with negative and zero elements */
 	int arr[] = {-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5};
+
+    /* Initialize a vector with the array */
 	std::vector<int> vec(arr, arr + sizeof(arr) / sizeof(arr[0]));
 
+    /* Print the elements of the vector */
 	printContainer(vec);
 
+    /* Try to find the element -3 in the vector */
 	try
     {
+        /* Search for the element -3 in the vector */
 		std::vector<int>::iterator it = easyfind(vec, -3);
+
+        /* Check if the iterator points to the correct element */
 		ASSERT_TEST(*it == -3, "Found the element -3 in the vector");
 	}
+    
+    /* Catch any exceptions */
     catch (std::exception &e)
     {
+        /* If the element is not found, the test should fail */
 		ASSERT_TEST(false, e.what());
 	}
 
+    /* Try to find the element 0 in the vector */
 	try
     {
+        /* Search for the element 0 in the vector */
 		std::vector<int>::iterator it = easyfind(vec, 0);
+
+        /* Check if the iterator points to the correct element */
 		ASSERT_TEST(*it == 0, "Found the element 0 in the vector");
 	}
+
+    /* Catch any exceptions */
     catch (std::exception &e)
     {
+        /* If the element is not found, the test should fail */
 		ASSERT_TEST(false, e.what());
 	}
 }
@@ -382,28 +525,44 @@ void testEasyFindNegativeAndZero()
  */
 void testEasyFindMultipleOccurrences()
 {
+    /* Initialize an array with multiple occurrences of the element 2 */
     int arr[] = {1, 2, 3, 2, 1};
+
+    /* Initialize a vector with the array */
     std::vector<int> vec(arr, arr + sizeof(arr) / sizeof(arr[0]));
 
+    /* Print the elements of the vector */
     printContainer(vec);
 
+    /* Try to find the element 2 in the vector */
     try
     {
+        /* Search for the element 2 in the vector */
         std::vector<int>::iterator it = easyfind(vec, 2);
+
+        /* Get the index of the element */
         size_t index = std::distance(vec.begin(), it);
 
-        // Find the expected index of the first occurrence of the element 2
+        /* std::find returns an iterator to the first occurrence of the element in the range [first, last) */
         std::vector<int>::iterator expectedIt = std::find(vec.begin(), vec.end(), 2);
+
+        /* Get the index of the first occurrence of the element */
         size_t expectedIndex = std::distance(vec.begin(), expectedIt);
         
+        /* Create a string stream to store the message */
         std::ostringstream oss;
+
+        /* Append the message to the string stream */
         oss << "Found the first occurrence of element 2 at index[" << index << "] in the vector";
 
-        // Check if the iterator points to the correct element and the correct index
+        /* Check if the iterator points to the correct element and the correct index */
         ASSERT_TEST(*it == 2 && index == expectedIndex, oss.str());
     }
+
+    /* Catch any exceptions */
     catch (std::exception &e)
     {
+        /* If the element is not found, the test should fail */
         ASSERT_TEST(false, e.what());
     }
 }
@@ -413,38 +572,59 @@ void testEasyFindMultipleOccurrences()
  */
 int main(int argc, char *argv[])
 {
+    /* Check if the program is run without any arguments */
 	if (argc == 1)
 	{
 		std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */" << NC << std::endl;
 		std::cout << CYAN << "/*                                 MANDATORY                                  */" << NC << std::endl;
 		std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */\n" << NC << std::endl;
 
+        /* Declare a vector of integers */
 		std::vector<int> vec;
+        
+        /* Fill the vector with elements from 0 to 9 */
 		for (int i = 0; i < 10; ++i)
         {
+            /* Add the element to the vector */
 			vec.push_back(i);
 		}
 
+        /* Try to find the element 5 in the vector */
 		try
         {
+            /* Search for the element 5 in the vector */
 			std::vector<int>::iterator it = easyfind(vec, 5);
+            
+            /* Print the found element */
 			std::cout << "Found: " << *it << std::endl;
 		}
+
+        /* Catch any exceptions */
         catch (std::exception &e)
         {
+            /* Print the exception message */
 			std::cerr << e.what() << std::endl;
 		}
 
+        /* Try to find the element 20 in the vector */
 		try
         {
+            /* Search for the element 20 in the vector */
 			std::vector<int>::iterator it = easyfind(vec, 20);
+            
+            /* Print the found element */
 			std::cout << "Found: " << *it << std::endl;
 		}
+
+        /* Catch any exceptions */
         catch (std::exception &e)
         {
+            /* Print the exception message */
 			std::cerr << e.what() << std::endl;
 		}
 	}
+
+    /* Check if the program is run with the argument "tester" */
 	else if (argc == 2 && strcmp(argv[1], "tester") == 0)
 	{
 		std::cout << CYAN << "\n/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */" << NC << std::endl;
@@ -452,30 +632,48 @@ int main(int argc, char *argv[])
 		std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */\n" << NC << std::endl;
 
 		std::cout << MAGENTA << "TEST EASYFIND PRESENT" << NC << std::endl;
+
+        /* Test the easyfind function with a present element */
 		testEasyFindPresent();
 
 		std::cout << std::endl << MAGENTA << "TEST EASYFIND ABSENT" << NC << std::endl;
+
+        /* Test the easyfind function with an absent element */
 		testEasyFindAbsent();
 
 		std::cout << std::endl << MAGENTA << "TEST EASYFIND WITH LIST" << NC << std::endl;
+
+        /* Test the easyfind function with a list */
 		testEasyFindList();
 
 		std::cout << std::endl << MAGENTA << "TEST EASYFIND WITH DEQUE" << NC << std::endl;
+
+        /* Test the easyfind function with a deque */
 		testEasyFindDeque();
 
 		std::cout << std::endl << MAGENTA << "TEST EASYFIND WITH SET" << NC << std::endl;
+
+        /* Test the easyfind function with a set */
 		testEasyFindSet();
 
 		std::cout << std::endl << MAGENTA << "TEST EASYFIND WITH EMPTY CONTAINER" << NC << std::endl;
+
+        /* Test the easyfind function with an empty container */
 		testEasyFindEmpty();
 
 		std::cout << std::endl << MAGENTA << "TEST EASYFIND WITH LARGE CONTAINER" << NC << std::endl;
+
+        /* Test the easyfind function with a large container */
 		testEasyFindLargeContainer();
 
 		std::cout << std::endl << MAGENTA << "TEST EASYFIND WITH NEGATIVE AND ZERO" << NC << std::endl;
+
+        /* Test the easyfind function with negative and zero elements */
 		testEasyFindNegativeAndZero();
 
 		std::cout << std::endl << MAGENTA << "TEST EASYFIND WITH MULTIPLE OCCURRENCES" << NC << std::endl;
+
+        /* Test the easyfind function with multiple occurrences of an element */
 		testEasyFindMultipleOccurrences();
 	}
 	else
