@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 00:02:28 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/12 01:49:02 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/12 01:55:39 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,13 @@
 	else { std::cout << RED "[TEST FAILED]" << NC << " " << message << std::endl; }
 
 /* Define return values */
-#define RETURN_SUCCESS 0
-#define RETURN_FAILURE 1
 #define ARG_COUNT 2
+#define NO_ARGUMENTS 1
+#define RETURN_SUCCESS 0
+#define FIRST_ARGUMENT 1
+#define RETURN_FAILURE 1
 #define TEST_ARG "tester"
 #define STRING_COMPARE_SUCCESS 0
-#define FIRST_ARGUMENT 1
-#define NO_ARGUMENTS 1
-
-
 
 /**
  * @brief Print the elements of a container
