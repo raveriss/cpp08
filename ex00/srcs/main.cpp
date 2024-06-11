@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 00:02:28 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/12 01:18:55 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/12 01:49:02 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,17 @@
 #define ASSERT_TEST(expression, message) \
 	if (expression) { std::cout << GREEN "[TEST PASSED]" << NC << " " << message << std::endl; } \
 	else { std::cout << RED "[TEST FAILED]" << NC << " " << message << std::endl; }
+
+/* Define return values */
+#define RETURN_SUCCESS 0
+#define RETURN_FAILURE 1
+#define ARG_COUNT 2
+#define TEST_ARG "tester"
+#define STRING_COMPARE_SUCCESS 0
+#define FIRST_ARGUMENT 1
+#define NO_ARGUMENTS 1
+
+
 
 /**
  * @brief Print the elements of a container
@@ -573,7 +584,7 @@ void testEasyFindMultipleOccurrences()
 int main(int argc, char *argv[])
 {
     /* Check if the program is run without any arguments */
-	if (argc == 1)
+	if (argc == NO_ARGUMENTS)
 	{
         /* Print the title of the test mandatory */
 		std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */" << NC << std::endl;
@@ -626,7 +637,7 @@ int main(int argc, char *argv[])
 	}
 
     /* Check if the program is run with the argument "tester" */
-	else if (argc == 2 && strcmp(argv[1], "tester") == 0)
+	else if (argc == ARG_COUNT && strcmp(argv[FIRST_ARGUMENT], TEST_ARG) == STRING_COMPARE_SUCCESS)
 	{
         /* Print the title of the test optional */
 		std::cout << CYAN << "\n/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */" << NC << std::endl;
@@ -689,11 +700,15 @@ int main(int argc, char *argv[])
 	}
 	else
 	{
+        /* Print the usage of the program */
 		std::cout << RED << "Usage: ./easyfind or ./easyfind tester" << NC << std::endl;
-		return 1;
+
+        /* Return 1 if the program did not run successfully */
+		return RETURN_FAILURE;
 	}
 
-	return 0;
+    /* Return 0 if the program ran successfully */
+	return RETURN_SUCCESS;
 }
 
 /* main.cpp */
