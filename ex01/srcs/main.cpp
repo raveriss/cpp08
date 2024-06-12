@@ -6,16 +6,26 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:44:41 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/12 23:37:26 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/13 00:22:15 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/* Inclusion de la classe Span */
 #include "../incs/Span.hpp"
+
+/* Inclusion de la bibliothèque standard pour std::cout */
 #include <iostream>
+
+/* Inclusion de la bibliothèque standard pour std::vector */
 #include <vector>
+
+/* Inclusion de la bibliothèque standard pour std::ostringstream */
 #include <sstream>
+
+/* Inclusion de la bibliothèque standard pour std::strcmp */
 #include <cstring>
 
+/* Definitions of ANSI color codes for console output */
 #define GREY        "\033[0;30m"
 #define RED         "\033[0;31m"
 #define GREEN       "\033[0;32m"
@@ -25,10 +35,23 @@
 #define CYAN        "\033[0;36m"
 #define NC          "\033[0m"
 
+/* Define return values */
+#define ARG_ONE 2
+#define NO_ARGUMENTS 1
+#define RETURN_SUCCESS 0
+#define FIRST_ARGUMENT 1
+#define RETURN_FAILURE 1
+#define TEST_ARG "tester"
+#define STRING_COMPARE_SUCCESS 0
+
+/* Macro for asserting test results and displaying appropriate messages */
 #define ASSERT_TEST(expression, message) \
     if (expression) { std::cout << GREEN "[TEST PASSED]" << NC << " " << message << std::endl; } \
     else { std::cout << RED "[TEST FAILED]" << NC << " " << message << std::endl; }
 
+/**
+ * @brief Capture and compare output of a function
+ */
 void captureAndCompareOutput(void (*func)(), const std::string& expected, const std::string& message)
 {
     std::ostringstream buffer;
@@ -41,6 +64,9 @@ void captureAndCompareOutput(void (*func)(), const std::string& expected, const 
     ASSERT_TEST(output == expected, message);
 }
 
+/**
+ * @brief Test constructor with valid capacity
+ */
 void testConstructorValidCapacity()
 {
     Span sp(5);
@@ -50,6 +76,9 @@ void testConstructorValidCapacity()
     ASSERT_TEST(sp.capacity() == 5, "Span should have the correct capacity");
 }
 
+/**
+ * @brief Test constructor with zero capacity
+ */
 void testConstructorZeroCapacity()
 {
     try
@@ -64,6 +93,9 @@ void testConstructorZeroCapacity()
     }
 }
 
+/**
+ * @brief Test adding numbers to Span up to its capacity
+ */
 void testAddNumberToMaxCapacity()
 {
     Span sp(5);
@@ -75,6 +107,9 @@ void testAddNumberToMaxCapacity()
     ASSERT_TEST(sp.size() == 5, "Span should store numbers up to its capacity");
 }
 
+/**
+ * @brief Test adding numbers beyond Span's capacity
+ */
 void testAddNumberBeyondCapacity()
 {
     Span sp(5);
@@ -94,6 +129,9 @@ void testAddNumberBeyondCapacity()
     }
 }
 
+/**
+ * @brief Test calculating shortest span on empty Span
+ */
 void testShortestSpanEmpty()
 {
     Span sp(5);
@@ -109,6 +147,9 @@ void testShortestSpanEmpty()
     }
 }
 
+/**
+ * @brief Test calculating shortest span with one element
+ */
 void testShortestSpanSingleElement()
 {
     Span sp(5);
@@ -125,6 +166,9 @@ void testShortestSpanSingleElement()
     }
 }
 
+/**
+ * @brief Test calculating shortest span with multiple elements
+ */
 void testShortestSpanMultipleElements()
 {
     Span sp(5);
@@ -137,6 +181,9 @@ void testShortestSpanMultipleElements()
     ASSERT_TEST(sp.shortestSpan() == 2, "Shortest span should be 2");
 }
 
+/**
+ * @brief Test calculating longest span on empty Span
+ */
 void testLongestSpanEmpty()
 {
     Span sp(5);
@@ -152,6 +199,9 @@ void testLongestSpanEmpty()
     }
 }
 
+/**
+ * @brief Test calculating longest span with one element
+ */
 void testLongestSpanSingleElement()
 {
     Span sp(5);
@@ -168,6 +218,9 @@ void testLongestSpanSingleElement()
     }
 }
 
+/**
+ * @brief Test calculating longest span with multiple elements
+ */
 void testLongestSpanMultipleElements()
 {
     Span sp(5);
@@ -180,6 +233,9 @@ void testLongestSpanMultipleElements()
     ASSERT_TEST(sp.longestSpan() == 14, "Longest span should be 14");
 }
 
+/**
+ * @brief Test adding range within Span's capacity
+ */
 void testAddRangeWithinCapacity()
 {
     Span sp(10);
@@ -190,6 +246,9 @@ void testAddRangeWithinCapacity()
     ASSERT_TEST(sp.size() == 5, "Span should store numbers from range");
 }
 
+/**
+ * @brief Test adding range beyond Span's capacity
+ */
 void testAddRangeBeyondCapacity()
 {
     Span sp(5);
@@ -207,6 +266,9 @@ void testAddRangeBeyondCapacity()
     }
 }
 
+/**
+ * @brief Test performance with 10000 numbers
+ */
 void testPerformance10000Numbers()
 {
     Span sp(10000);
@@ -222,6 +284,9 @@ void testPerformance10000Numbers()
     ASSERT_TEST(sp.longestSpan() == 9999, "Longest span with 10000 numbers should be 9999");
 }
 
+/**
+ * @brief Test performance with 100000 numbers
+ */
 void testPerformance100000Numbers()
 {
     Span sp(100000);
@@ -236,6 +301,9 @@ void testPerformance100000Numbers()
     ASSERT_TEST(sp.longestSpan() == 99999, "Longest span with 100000 numbers should be 99999");
 }
 
+/**
+ * @brief Test identical numbers
+ */
 void testIdenticalNumbers()
 {
     Span sp(5);
@@ -249,6 +317,9 @@ void testIdenticalNumbers()
     ASSERT_TEST(sp.longestSpan() == 0, "Longest span with identical numbers should be 0");
 }
 
+/**
+ * @brief Test negative and positive numbers
+ */
 void testNegativeAndPositiveNumbers()
 {
     Span sp(5);
@@ -263,9 +334,77 @@ void testNegativeAndPositiveNumbers()
     ASSERT_TEST(sp.longestSpan() == 40, "Longest span with negative and positive numbers should be 40");
 }
 
+/**
+ * @brief Test copy constructor
+ */
+void testCopyConstructor()
+{
+    Span sp1(5);
+    sp1.addNumber(1);
+    sp1.addNumber(2);
+    sp1.addNumber(3);
+
+    Span sp2(sp1);
+    std::cout << sp1.print() << std::endl;
+    std::cout << sp2.print() << std::endl;
+    ASSERT_TEST(sp1.size() == sp2.size(), "Copied Span should have the same size");
+    ASSERT_TEST(sp1.shortestSpan() == sp2.shortestSpan(), "Copied Span should have the same shortest span");
+    ASSERT_TEST(sp1.longestSpan() == sp2.longestSpan(), "Copied Span should have the same longest span");
+}
+
+/**
+ * @brief Test assignment operator
+ */
+void testAssignmentOperator()
+{
+    Span sp1(5);
+    sp1.addNumber(1);
+    sp1.addNumber(2);
+    sp1.addNumber(3);
+
+    Span sp2(10);
+    sp2 = sp1;
+    std::cout << sp1.print() << std::endl;
+    std::cout << sp2.print() << std::endl;
+    ASSERT_TEST(sp1.size() == sp2.size(), "Assigned Span should have the same size");
+    ASSERT_TEST(sp1.shortestSpan() == sp2.shortestSpan(), "Assigned Span should have the same shortest span");
+    ASSERT_TEST(sp1.longestSpan() == sp2.longestSpan(), "Assigned Span should have the same longest span");
+}
+
+/**
+ * @brief Test clear and reuse
+ */
+void testClearAndReuse()
+{
+    Span sp(5);
+    sp.addNumber(1);
+    sp.addNumber(2);
+    sp.addNumber(3);
+    sp.addNumber(4);
+    sp.addNumber(5);
+    std::cout << sp.print() << std::endl;
+
+    std::cout << "Clearing Span..." << std::endl;
+    sp.clear(); // Appel de la méthode clear pour vider le Span
+    std::cout << sp.print() << std::endl;
+    ASSERT_TEST(sp.size() == 0, "Span should be empty after clear");
+
+    std::cout << "Re-using Span..." << std::endl;
+    sp.addNumber(4);
+    sp.addNumber(5);
+    std::cout << sp.print() << std::endl;
+    ASSERT_TEST(sp.size() == 2, "Span should have 2 elements after reuse");
+    ASSERT_TEST(sp.shortestSpan() == 1, "Shortest span should be 1 after reuse");
+    ASSERT_TEST(sp.longestSpan() == 1, "Longest span should be 1 after reuse");
+}
+
+
+/**
+ * @brief Main function
+ */
 int main(int argc, char *argv[])
 {
-    if (argc == 1)
+    if (argc == NO_ARGUMENTS)
     {
         std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */" << NC << std ::endl;
         std::cout << CYAN << "/*                                 MANDATORY                                  */" << NC << std ::endl;
@@ -280,13 +419,19 @@ int main(int argc, char *argv[])
         std::cout << sp.shortestSpan() << std::endl;
         std::cout << sp.longestSpan() << std::endl;
     }
-    else if (argc == 2 && strcmp(argv[1], "tester") == 0)
+    else if (argc == ARG_ONE && strcmp(argv[FIRST_ARGUMENT], TEST_ARG) == STRING_COMPARE_SUCCESS)
     {
         std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */" << NC << std ::endl;
         std::cout << CYAN << "/*                                 OPTIONNEL                                  */" << NC << std ::endl;
         std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */\n" << NC << std ::endl;
 
-        std::cout << MAGENTA << "TEST CONSTRUCTOR VALID CAPACITY" << NC << std::endl;
+        std::cout << MAGENTA << "TEST COPY CONSTRUCTOR" << NC << std::endl;
+        testCopyConstructor();
+
+        std::cout << std::endl << MAGENTA << "TEST ASSIGNMENT OPERATOR" << NC << std::endl;
+        testAssignmentOperator();
+
+        std::cout << std::endl << MAGENTA << "TEST CONSTRUCTOR VALID CAPACITY" << NC << std::endl;
         testConstructorValidCapacity();
 
         std::cout  << std::endl << MAGENTA << "TEST CONSTRUCTOR ZERO CAPACITY" << NC << std::endl;
@@ -333,14 +478,17 @@ int main(int argc, char *argv[])
 
         std::cout << std::endl << MAGENTA << "TEST NEGATIVE AND POSITIVE NUMBERS" << NC << std::endl;
         testNegativeAndPositiveNumbers();
+
+        std::cout << std::endl << MAGENTA << "TEST CLEAR AND RE-USE" << NC << std::endl;
+        testClearAndReuse();
     }
     else
     {
         std::cout << RED << "Usage: ./span or ./span tester" << NC << std::endl;
-        return 1;
+        return RETURN_FAILURE;
     }
     
-    return 0;
+    return RETURN_SUCCESS;
 }
 
 /* main.cpp */

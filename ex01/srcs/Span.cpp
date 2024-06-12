@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 23:33:33 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/12 23:41:58 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/13 00:12:33 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,9 @@ std::string Span::print() const
     return oss.str();
 }
 
-// Implémentation de la méthode printLargeContainer
+/**
+ * @brief Print the first 3 and last 3 elements of the Span object
+ */
 std::string Span::printLargeContainer() const
 {
     std::ostringstream oss;
@@ -163,4 +165,9 @@ std::string Span::printLargeContainer() const
     
     oss << " ]";
     return oss.str();
+}
+
+void Span::clear()
+{
+    _data.clear(); // Vider le vecteur des données
 }
