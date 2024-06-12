@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:44:41 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/13 00:38:19 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/13 00:40:02 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -386,7 +386,9 @@ void testClearAndReuse()
     std::cout << std::endl;
 
     std::cout << "Clearing Span..." << std::endl;
-    sp.clear(); // Appel de la méthode clear pour vider le Span
+    
+    /* Appel de la méthode clear pour vider le Span */
+    sp.clear();
     std::cout << sp.print() << std::endl;
     ASSERT_TEST(sp.size() == 0, "Span should be empty after clear");
     std::cout << std::endl;
