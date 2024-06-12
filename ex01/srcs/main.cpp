@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:44:41 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/13 00:34:38 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/13 00:38:19 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -426,60 +426,79 @@ int main(int argc, char *argv[])
         std::cout << CYAN << "/*                                 OPTIONNEL                                  */" << NC << std ::endl;
         std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */\n" << NC << std ::endl;
 
+        /* Test copy constructor */
         std::cout << MAGENTA << "TEST COPY CONSTRUCTOR" << NC << std::endl;
         testCopyConstructor();
 
+        /* Test assignment operator */
         std::cout << std::endl << MAGENTA << "TEST ASSIGNMENT OPERATOR" << NC << std::endl;
         testAssignmentOperator();
 
+        /* Test constructor with valid capacity */
         std::cout << std::endl << MAGENTA << "TEST CONSTRUCTOR VALID CAPACITY" << NC << std::endl;
         testConstructorValidCapacity();
 
+        /* Test constructor with zero capacity */
         std::cout  << std::endl << MAGENTA << "TEST CONSTRUCTOR ZERO CAPACITY" << NC << std::endl;
         testConstructorZeroCapacity();
 
+        /* Test add number to max capacity */
         std::cout  << std::endl << MAGENTA << "TEST ADD NUMBER TO MAX CAPACITY" << NC << std::endl;
         testAddNumberToMaxCapacity();
 
+        /* Test add number beyond capacity */
         std::cout  << std::endl << MAGENTA << "TEST ADD NUMBER BEYOND CAPACITY" << NC << std::endl;
         testAddNumberBeyondCapacity();
 
+        /* Test shortest span empty */
         std::cout  << std::endl << MAGENTA << "TEST SHORTEST SPAN EMPTY" << NC << std::endl;
         testShortestSpanEmpty();
 
+        /* Test shortest span single element */
         std::cout << std::endl << MAGENTA << "TEST SHORTEST SPAN SINGLE ELEMENT" << NC << std::endl;
         testShortestSpanSingleElement();
 
+        /* Test shortest span multiple elements */
         std::cout << std::endl << MAGENTA << "TEST SHORTEST SPAN MULTIPLE ELEMENTS" << NC << std::endl;
         testShortestSpanMultipleElements();
 
+        /* Test longest span empty */
         std::cout << std::endl << MAGENTA << "TEST LONGEST SPAN EMPTY" << NC << std::endl;
         testLongestSpanEmpty();
 
+        /* Test longest span single element */
         std::cout << std::endl << MAGENTA << "TEST LONGEST SPAN SINGLE ELEMENT" << NC << std::endl;
         testLongestSpanSingleElement();
 
+        /* Test longest span multiple elements */
         std::cout << std::endl << MAGENTA << "TEST LONGEST SPAN MULTIPLE ELEMENTS" << NC << std::endl;
         testLongestSpanMultipleElements();
 
+        /* Test add range within capacity */
         std::cout << std::endl << MAGENTA << "TEST ADD RANGE WITHIN CAPACITY" << NC << std::endl;
         testAddRangeWithinCapacity();
 
+        /* Test add range beyond capacity */
         std::cout << std::endl << MAGENTA << "TEST ADD RANGE BEYOND CAPACITY" << NC << std::endl;
         testAddRangeBeyondCapacity();
 
+        /* Test performance 10000 numbers */
         std::cout << std::endl << MAGENTA << "TEST PERFORMANCE 10000 NUMBERS" << NC << std::endl;
         testPerformance10000Numbers();
 
+        /* Test performance 100000 numbers */
         std::cout << std::endl << MAGENTA << "TEST PERFORMANCE 100000 NUMBERS" << NC << std::endl;
         testPerformance100000Numbers();
 
+        /* Test identical numbers */
         std::cout << std::endl << MAGENTA << "TEST IDENTICAL NUMBERS" << NC << std::endl;
         testIdenticalNumbers();
 
+        /* Test negative and positive numbers */
         std::cout << std::endl << MAGENTA << "TEST NEGATIVE AND POSITIVE NUMBERS" << NC << std::endl;
         testNegativeAndPositiveNumbers();
 
+        /* Test clear and reuse */
         std::cout << std::endl << MAGENTA << "TEST CLEAR AND RE-USE" << NC << std::endl;
         testClearAndReuse();
     }
