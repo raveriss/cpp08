@@ -6,22 +6,22 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 18:38:45 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/12 18:39:18 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/12 23:36:18 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SPAN_HPP
-#define SPAN_HPP
+#pragma once
 
 #include <vector>
 #include <algorithm>
 #include <exception>
-
+#include <string>
 class Span
 {
 private:
     unsigned int _n;
     std::vector<int> _data;
+
 
 public:
     Span(unsigned int n);
@@ -30,6 +30,7 @@ public:
     ~Span();
 
     void addNumber(int number);
+    
     template <typename Iterator>
     void addNumbers(Iterator begin, Iterator end);
 
@@ -38,17 +39,19 @@ public:
 
     unsigned int size() const;
     unsigned int capacity() const;
+    
+    std::string print() const;
+    std::string printLargeContainer() const; // Ajout de la méthode
+
 
     class SpanException : public std::exception
     {
-    private:
-        const char* _msg;
-    public:
-        SpanException(const char* msg) : _msg(msg) {}
-        virtual const char* what() const throw() { return _msg; }
+        private:
+            const char* _msg;
+        public:
+            SpanException(const char* msg) : _msg(msg) {}
+            virtual const char* what() const throw() { return _msg; }
     };
 };
 
 #include "../srcs/Span.tpp"
-
-#endif

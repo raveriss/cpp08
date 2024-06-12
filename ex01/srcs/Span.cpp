@@ -1,9 +1,35 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Span.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/12 23:33:33 by raveriss          #+#    #+#             */
+/*   Updated: 2024/06/12 23:41:58 by raveriss         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../incs/Span.hpp"
+#include <sstream>
 
-Span::Span(unsigned int n) : _n(n) {}
+/**
+ * @brief Constructor
+ */
+Span::Span(unsigned int n) :
+_n(n)
+{}
 
-Span::Span(const Span &other) : _n(other._n), _data(other._data) {}
+/**
+ * @brief Copy constructor
+ */
+Span::Span(const Span &other) :
+_n(other._n), _data(other._data)
+{}
 
+/**
+ * @brief Assignment operator
+ */
 Span &Span::operator=(const Span &other)
 {
     if (this != &other)
@@ -14,8 +40,15 @@ Span &Span::operator=(const Span &other)
     return *this;
 }
 
-Span::~Span() {}
+/**
+ * @brief Destructor
+ */
+Span::~Span()
+{}
 
+/**
+ * @brief Add a number to the Span object
+ */
 void Span::addNumber(int number)
 {
     if (_data.size() >= _n)
@@ -25,6 +58,9 @@ void Span::addNumber(int number)
     _data.push_back(number);
 }
 
+/**
+ * @brief Find the shortest span between the elements in the Span object
+ */
 int Span::shortestSpan() const
 {
     if (_data.size() < 2)
@@ -45,6 +81,9 @@ int Span::shortestSpan() const
     return shortest;
 }
 
+/**
+ * @brief Find the longest span between the elements in the Span object
+ */
 int Span::longestSpan() const
 {
     if (_data.size() < 2)
@@ -56,12 +95,72 @@ int Span::longestSpan() const
     return max - min;
 }
 
+/**
+ * @brief Get the size of the Span object
+ */
 unsigned int Span::size() const
 {
     return _data.size();
 }
 
+/**
+ * @brief Get the capacity of the Span object
+ */
 unsigned int Span::capacity() const
 {
     return _n;
+}
+
+/**
+ * @brief Print the data in the Span object
+ */
+std::string Span::print() const
+{
+    std::ostringstream oss;
+    oss << "[ ";
+    for (size_t i = 0; i < _data.size(); ++i)
+    {
+        oss << _data[i];
+        if (i < _data.size() - 1)
+            oss << ", ";
+    }
+    oss << " ]";
+    return oss.str();
+}
+
+// Implémentation de la méthode printLargeContainer
+std::string Span::printLargeContainer() const
+{
+    std::ostringstream oss;
+    size_t size = _data.size();
+    oss << "[ ";
+
+    if (size <= 6)
+    {
+        for (size_t i = 0; i < size; ++i)
+        {
+            oss << _data[i];
+            if (i < size - 1)
+                oss << ", ";
+        }
+    }
+    else
+    {
+        for (size_t i = 0; i < 3; ++i)
+        {
+            oss << _data[i] << ", ";
+        }
+
+        oss << "..., ";
+
+        for (size_t i = size - 3; i < size; ++i)
+        {
+            oss << _data[i];
+            if (i < size - 1)
+                oss << ", ";
+        }
+    }
+    
+    oss << " ]";
+    return oss.str();
 }

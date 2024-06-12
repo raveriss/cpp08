@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:44:41 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/12 18:39:34 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/12 23:37:26 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ void captureAndCompareOutput(void (*func)(), const std::string& expected, const 
 void testConstructorValidCapacity()
 {
     Span sp(5);
+    std::cout << sp.print() << std::endl;
     ASSERT_TEST(sp.size() == 0, "Span should be initialized with size 0");
+    std::cout << sp.print() << std::endl;
     ASSERT_TEST(sp.capacity() == 5, "Span should have the correct capacity");
 }
 
@@ -53,6 +55,7 @@ void testConstructorZeroCapacity()
     try
     {
         Span sp(0);
+        std::cout << sp.print() << std::endl;
         ASSERT_TEST(sp.capacity() == 0, "Span should be initialized with zero capacity");
     }
     catch(const std::exception& e)
@@ -68,6 +71,7 @@ void testAddNumberToMaxCapacity()
     {
         sp.addNumber(i);
     }
+    std::cout << sp.print() << std::endl;
     ASSERT_TEST(sp.size() == 5, "Span should store numbers up to its capacity");
 }
 
@@ -85,6 +89,7 @@ void testAddNumberBeyondCapacity()
     }
     catch(const std::exception& e)
     {
+        std::cout << sp.print() << std::endl;
         ASSERT_TEST(true, "Exception thrown as expected");
     }
 }
@@ -99,6 +104,7 @@ void testShortestSpanEmpty()
     }
     catch(const std::exception& e)
     {
+        std::cout << sp.print() << std::endl;
         ASSERT_TEST(true, "Exception thrown as expected");
     }
 }
@@ -114,6 +120,7 @@ void testShortestSpanSingleElement()
     }
     catch(const std::exception& e)
     {
+        std::cout << sp.print() << std::endl;
         ASSERT_TEST(true, "Exception thrown as expected");
     }
 }
@@ -126,6 +133,7 @@ void testShortestSpanMultipleElements()
     sp.addNumber(17);
     sp.addNumber(9);
     sp.addNumber(11);
+    std::cout << sp.print() << std::endl;
     ASSERT_TEST(sp.shortestSpan() == 2, "Shortest span should be 2");
 }
 
@@ -139,6 +147,7 @@ void testLongestSpanEmpty()
     }
     catch(const std::exception& e)
     {
+        std::cout << sp.print() << std::endl;
         ASSERT_TEST(true, "Exception thrown as expected");
     }
 }
@@ -154,6 +163,7 @@ void testLongestSpanSingleElement()
     }
     catch(const std::exception& e)
     {
+        std::cout << sp.print() << std::endl;
         ASSERT_TEST(true, "Exception thrown as expected");
     }
 }
@@ -166,6 +176,7 @@ void testLongestSpanMultipleElements()
     sp.addNumber(17);
     sp.addNumber(9);
     sp.addNumber(11);
+    std::cout << sp.print() << std::endl;
     ASSERT_TEST(sp.longestSpan() == 14, "Longest span should be 14");
 }
 
@@ -175,6 +186,7 @@ void testAddRangeWithinCapacity()
     int arr[] = {1, 2, 3, 4, 5};
     std::vector<int> rangeVec(arr, arr + sizeof(arr) / sizeof(int));
     sp.addNumbers(rangeVec.begin(), rangeVec.end());
+    std::cout << sp.print() << std::endl;
     ASSERT_TEST(sp.size() == 5, "Span should store numbers from range");
 }
 
@@ -190,6 +202,7 @@ void testAddRangeBeyondCapacity()
     }
     catch(const std::exception& e)
     {
+        std::cout << sp.print() << std::endl;
         ASSERT_TEST(true, "Exception thrown as expected");
     }
 }
@@ -201,7 +214,11 @@ void testPerformance10000Numbers()
     {
         sp.addNumber(i);
     }
+    std::cout << sp.printLargeContainer() << std::endl;
+
     ASSERT_TEST(sp.shortestSpan() == 1, "Shortest span with 10000 numbers should be 1");
+    std::cout << sp.printLargeContainer() << std::endl;
+
     ASSERT_TEST(sp.longestSpan() == 9999, "Longest span with 10000 numbers should be 9999");
 }
 
@@ -212,7 +229,10 @@ void testPerformance100000Numbers()
     {
         sp.addNumber(i);
     }
+    std::cout << sp.printLargeContainer() << std::endl;
     ASSERT_TEST(sp.shortestSpan() == 1, "Shortest span with 100000 numbers should be 1");
+    std::cout << sp.printLargeContainer() << std::endl;
+
     ASSERT_TEST(sp.longestSpan() == 99999, "Longest span with 100000 numbers should be 99999");
 }
 
@@ -223,7 +243,9 @@ void testIdenticalNumbers()
     {
         sp.addNumber(1);
     }
+    std::cout << sp.print() << std::endl;
     ASSERT_TEST(sp.shortestSpan() == 0, "Shortest span with identical numbers should be 0");
+    std::cout << sp.print() << std::endl;
     ASSERT_TEST(sp.longestSpan() == 0, "Longest span with identical numbers should be 0");
 }
 
@@ -235,7 +257,9 @@ void testNegativeAndPositiveNumbers()
     sp.addNumber(-20);
     sp.addNumber(20);
     sp.addNumber(0);
+    std::cout << sp.print() << std::endl;
     ASSERT_TEST(sp.shortestSpan() == 10, "Shortest span with negative and positive numbers should be 10");
+    std::cout << sp.print() << std::endl;
     ASSERT_TEST(sp.longestSpan() == 40, "Longest span with negative and positive numbers should be 40");
 }
 
