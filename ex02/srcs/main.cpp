@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:44:41 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/14 00:44:26 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/14 01:23:21 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,30 @@
 #define BLUE        "\033[0;34m"
 #define MAGENTA     "\033[0;35m"
 #define CYAN        "\033[0;36m"
-#define NC          "\033[0m"
+#define WHITE       "\033[0;37m"
+
+#define BRIGHT_GREY    "\033[1;30m"
+#define BRIGHT_RED     "\033[1;31m"
+#define BRIGHT_GREEN   "\033[1;32m"
+#define BRIGHT_YELLOW  "\033[1;33m"
+#define BRIGHT_BLUE    "\033[1;34m"
+#define BRIGHT_MAGENTA "\033[1;35m"
+#define BRIGHT_CYAN    "\033[1;36m"
+#define BRIGHT_WHITE   "\033[1;37m"
+
+#define BLACK_BG       "\033[40m"
+#define RED_BG         "\033[41m"
+#define GREEN_BG       "\033[42m"
+#define YELLOW_BG      "\033[43m"
+#define BLUE_BG        "\033[44m"
+#define MAGENTA_BG     "\033[45m"
+#define CYAN_BG        "\033[46m"
+#define WHITE_BG       "\033[47m"
+
+#define BOLD           "\033[1m"
+#define UNDERLINE      "\033[4m"
+#define RESET          "\033[0m"
+#define NC             RESET  // No Color
 
 /* Define return values */
 #define ARG_ONE 2
@@ -435,7 +458,7 @@ void testIntensiveUsage()
     std::cout << std::endl << MAGENTA << "TEST INTENSIVE USAGE" << NC << std::endl;
     MutantStack<int> stack;
 
-    std::cout << BLUE << "Pushing 1000000 elements..." << NC << std::endl;
+    std::cout << BRIGHT_CYAN << "Pushing 1000000 elements..." << NC << std::endl;
     for (int i = 0; i < 1000000; ++i) {
         stack.push(i);
     }
@@ -443,7 +466,7 @@ void testIntensiveUsage()
     /* Imprimer le contenu de la pile */
     stack.printLargeContainer();
     
-    std::cout << BLUE << "\nPopping 1000000 elements..." << NC << std::endl;
+    std::cout << BRIGHT_CYAN << "\nPopping 1000000 elements..." << NC << std::endl;
     for (int i = 0; i < 1000000; ++i) {
         stack.pop();
     }
@@ -461,7 +484,7 @@ void testPerformanceBalance()
 {
     std::cout << std::endl << MAGENTA << "TEST PERFORMANCE BALANCE" << NC << std::endl;
     MutantStack<int> stack;
-    std::cout << BLUE << "Pushing 1000 elements..." << NC << std::endl;
+    std::cout << BRIGHT_CYAN << "Pushing 1000 elements..." << NC << std::endl;
     for (int i = 0; i < 1000; ++i) {
         stack.push(i);
     }
@@ -471,7 +494,7 @@ void testPerformanceBalance()
     
     ASSERT_TEST(stack.size() == 1000, "Stack size should be 1000 after pushing 1000 elements");
 
-    std::cout << BLUE << "\nPopping 500 elements..." << NC << std::endl;
+    std::cout << BRIGHT_CYAN << "\nPopping 500 elements..." << NC << std::endl;
     for (int i = 0; i < 500; ++i) {
         stack.pop();
     }
@@ -481,7 +504,7 @@ void testPerformanceBalance()
     
     ASSERT_TEST(stack.size() == 500, "Stack size should be 500 after popping 500 elements");
 
-    std::cout << BLUE << "\nPushing another 500 elements..." << NC << std::endl;
+    std::cout << BRIGHT_CYAN << "\nPushing another 500 elements..." << NC << std::endl;
     for (int i = 0; i < 500; ++i) {
         stack.push(i);
     }
