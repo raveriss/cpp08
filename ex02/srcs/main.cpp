@@ -1,0 +1,404 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/12 16:44:41 by raveriss          #+#    #+#             */
+/*   Updated: 2024/06/13 17:36:09 by raveriss         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/* Inclusion de la classe MutantStack */
+#include "../incs/MutantStack.hpp"
+
+/* Inclusion de la bibliothèque standard pour std::cout */
+#include <iostream>
+
+/* Inclusion de la bibliothèque standard pour std::vector */
+#include <vector>
+
+/* Inclusion de la bibliothèque standard pour std::sstream */
+#include <sstream>
+
+/* Inclusion de la bibliothèque standard pour std::cstring */
+#include <cstring>
+
+#include <sstream>
+
+/* Definitions of ANSI color codes for console output */
+#define GREY        "\033[0;30m"
+#define RED         "\033[0;31m"
+#define GREEN       "\033[0;32m"
+#define YELLOW      "\033[0;33m"
+#define BLUE        "\033[0;34m"
+#define MAGENTA     "\033[0;35m"
+#define CYAN        "\033[0;36m"
+#define NC          "\033[0m"
+
+/* Define return values */
+#define ARG_ONE 2
+#define NO_ARGUMENTS 1
+#define RETURN_SUCCESS 0
+#define FIRST_ARGUMENT 1
+#define RETURN_FAILURE 1
+#define TEST_ARG "tester"
+#define STRING_COMPARE_SUCCESS 0
+
+/* Macro for asserting test results and displaying appropriate messages */
+#define ASSERT_TEST(expression, message) \
+    if (expression) { std::cout << GREEN "[TEST PASSED]" << NC << " " << message << std::endl; } \
+    else { std::cout << RED "[TEST FAILED]" << NC << " " << message << std::endl; }
+
+/* Function prototypes */
+void runTests();
+void testInitializationAndDestruction();
+void testBasicOperations();
+void testIterators();
+void testPerformance();
+void testRobustness();
+void testComparison();
+void testIntegration();
+void testResilience();
+void testBackupAndRestore();
+void testExceptionHandling();
+void testIntensiveUsage();
+void testPerformanceBalance();
+
+/**
+ * @brief Main function
+ */
+int main(int argc, char *argv[])
+{
+    if (argc == NO_ARGUMENTS)
+    {
+        /* Code pour les tests de base (équivalent au mode "MANDATORY") */
+        MutantStack<int> mstack;
+        mstack.push(5);
+        mstack.push(17);
+        std::cout << mstack.top() << std::endl; // Devrait afficher 17
+        mstack.pop();
+        std::cout << mstack.size() << std::endl; // Devrait afficher 1
+        mstack.push(3);
+        mstack.push(5);
+        mstack.push(737);
+        mstack.push(0);
+
+        MutantStack<int>::iterator it = mstack.begin();
+        MutantStack<int>::iterator ite = mstack.end();
+        ++it;
+        --it;
+        while (it != ite) {
+            std::cout << *it << std::endl;
+            ++it;
+        }
+
+        std::stack<int> s(mstack);
+    }
+    else if (argc == ARG_ONE && strcmp(argv[FIRST_ARGUMENT], TEST_ARG) == STRING_COMPARE_SUCCESS)
+    {
+        /* Code pour les tests détaillés (équivalent au mode "OPTIONNEL") */
+        std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */" << NC << std::endl;
+        std::cout << CYAN << "/*                                 OPTIONNEL                                  */" << NC << std::endl;
+        std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */\n" << NC << std::endl;
+
+        runTests();
+    }
+    else
+    {
+        std::cout << RED << "Usage: ./mutantstack or ./mutantstack tester" << NC << std::endl;
+        return RETURN_FAILURE;
+    }
+    
+    return RETURN_SUCCESS;
+}
+
+/**
+ * @brief Run all tests
+ */
+void runTests()
+{
+    testInitializationAndDestruction();
+    testBasicOperations();
+    testIterators();
+    testPerformance();
+    testRobustness();
+    testComparison();
+    testIntegration();
+    testResilience();
+    testBackupAndRestore();
+    testExceptionHandling();
+    testIntensiveUsage();
+    testPerformanceBalance();
+}
+
+/**
+ * @brief Test initialization and destruction
+ */
+void testInitializationAndDestruction()
+{
+    std::cout << MAGENTA << "TEST INITIALIZATION AND DESTRUCTION" << NC << std::endl;
+    MutantStack<int> stack;
+    ASSERT_TEST(stack.empty(), "Newly created stack should be empty");
+    // Destructor will be called automatically
+}
+
+/**
+ * @brief Test basic operations
+ */
+void testBasicOperations()
+{
+    std::cout << std::endl << MAGENTA << "TEST BASIC OPERATIONS" << NC << std::endl;
+    MutantStack<int> stack;
+    stack.push(1);
+    stack.push(2);
+    stack.push(3);
+    ASSERT_TEST(stack.size() == 3, "Stack size should be 3 after pushing 3 elements");
+    ASSERT_TEST(stack.top() == 3, "Top element should be 3");
+    stack.pop();
+    ASSERT_TEST(stack.size() == 2, "Stack size should be 2 after popping one element");
+    ASSERT_TEST(stack.top() == 2, "Top element should be 2 after popping");
+    ASSERT_TEST(!stack.empty(), "Stack should not be empty");
+    stack.pop();
+    stack.pop();
+    ASSERT_TEST(stack.empty(), "Stack should be empty after popping all elements");
+}
+
+/**
+ * @brief Test iterators
+ */
+void testIterators()
+{
+    std::cout << std::endl << MAGENTA << "TEST ITERATORS" << NC << std::endl;
+    MutantStack<int> stack;
+    stack.push(1);
+    stack.push(2);
+    stack.push(3);
+    MutantStack<int>::iterator it = stack.begin();
+    ASSERT_TEST(*it == 1, "Begin iterator should point to the first element");
+    ++it;
+    ASSERT_TEST(*it == 2, "Iterator increment should point to the second element");
+    --it;
+    ASSERT_TEST(*it == 1, "Iterator decrement should point back to the first element");
+    it = stack.end();
+    --it;
+    ASSERT_TEST(*it == 3, "End iterator should point past the last element");
+}
+
+/**
+ * @brief Test performance with a large number of elements
+ */
+void testPerformance()
+{
+    std::cout << std::endl << MAGENTA << "TEST PERFORMANCE" << NC << std::endl;
+    MutantStack<int> stack;
+    for (int i = 0; i < 1000000; ++i) {
+        stack.push(i);
+    }
+    ASSERT_TEST(stack.size() == 1000000, "Stack size should be 1000000 after pushing 1000000 elements");
+    for (int i = 0; i < 1000000; ++i) {
+        stack.pop();
+    }
+    ASSERT_TEST(stack.empty(), "Stack should be empty after popping all elements");
+}
+
+/**
+ * @brief Test robustness with different data types
+ */
+void testRobustness()
+{
+    std::cout << std::endl << MAGENTA << "TEST ROBUSTNESS" << NC << std::endl;
+    MutantStack<double> doubleStack;
+    doubleStack.push(1.1);
+    doubleStack.push(2.2);
+    doubleStack.push(3.3);
+    ASSERT_TEST(doubleStack.size() == 3, "Double stack size should be 3");
+
+    MutantStack<std::string> stringStack;
+    stringStack.push("Hello");
+    stringStack.push("World");
+    ASSERT_TEST(stringStack.top() == "World", "Top element should be 'World'");
+}
+
+/**
+ * @brief Test comparison with other containers
+ */
+void testComparison()
+{
+    std::cout << std::endl << MAGENTA << "TEST COMPARISON" << NC << std::endl;
+    MutantStack<int> stack;
+    std::vector<int> vec;
+    std::deque<int> deq;
+
+    for (int i = 0; i < 1000; ++i) {
+        stack.push(i);
+        vec.push_back(i);
+        deq.push_back(i);
+    }
+
+    ASSERT_TEST(stack.size() == vec.size(), "Stack size should match vector size");
+    ASSERT_TEST(stack.size() == deq.size(), "Stack size should match deque size");
+}
+
+/**
+ * @brief Test integration with other data structures
+ */
+void testIntegration()
+{
+    std::cout << std::endl << MAGENTA << "TEST INTEGRATION" << NC << std::endl;
+    
+    // Example use case: Copying elements between MutantStack and std::vector
+
+    // Create a MutantStack and push some elements
+    MutantStack<int> mstack;
+    for (int i = 0; i < 10; ++i) {
+        mstack.push(i);
+    }
+
+    // Copy elements from MutantStack to std::vector
+    std::vector<int> vec(mstack.begin(), mstack.end());
+    ASSERT_TEST(vec.size() == 10, "Vector size should be 10 after copying from MutantStack");
+    for (int i = 0; i < 10; ++i) {
+        ASSERT_TEST(vec[i] == i, "Vector elements should match the elements pushed to MutantStack");
+    }
+
+    // Modify the std::vector
+    for (int i = 0; i < 10; ++i) {
+        vec[i] = i * 2;
+    }
+
+    // Clear the MutantStack and copy modified elements back from std::vector
+    while (!mstack.empty()) {
+        mstack.pop();
+    }
+    for (std::vector<int>::iterator it = vec.begin(); it != vec.end(); ++it) {
+        mstack.push(*it);
+    }
+
+    // Verify the elements in MutantStack match the modified std::vector
+    int expected_value = 18;
+    bool allTestsPassed = true;
+    while (!mstack.empty()) {
+        if (mstack.top() != expected_value) {
+            allTestsPassed = false;
+        }
+        mstack.pop();
+        expected_value -= 2;
+    }
+    ASSERT_TEST(allTestsPassed, "MutantStack elements should match modified vector elements after copying back");
+}
+
+
+/**
+ * @brief Test resilience
+ */
+void testResilience()
+{
+    std::cout << std::endl << MAGENTA << "TEST RESILIENCE" << NC << std::endl;
+    bool allTestsPassed = true;
+    for (int i = 0; i < 1000; ++i) {
+        MutantStack<int> stack;
+        for (int j = 0; j < 100; ++j) {
+            stack.push(j);
+        }
+        if (stack.size() != 100) {
+            allTestsPassed = false;
+        }
+
+        for (int j = 99; j >= 0; --j) {
+            if (stack.top() != j) {
+                allTestsPassed = false;
+            }
+            stack.pop();
+        }
+        if (!stack.empty()) {
+            allTestsPassed = false;
+        }
+
+    }
+    ASSERT_TEST(allTestsPassed, "Test resilience completed successfully.");
+}
+
+
+/**
+ * @brief Test backup and restore
+ */
+void testBackupAndRestore()
+{
+    std::cout << std::endl << MAGENTA << "TEST BACKUP AND RESTORE" << NC << std::endl;
+    MutantStack<int> stack;
+    stack.push(1);
+    stack.push(2);
+    stack.push(3);
+
+    std::vector<int> backup;
+    for (MutantStack<int>::iterator it = stack.begin(); it != stack.end(); ++it) {
+        backup.push_back(*it);
+    }
+
+    MutantStack<int> restoredStack;
+    for (size_t i = 0; i < backup.size(); ++i) {
+        restoredStack.push(backup[i]);
+    }
+
+    ASSERT_TEST(stack.size() == restoredStack.size(), "Restored stack should have the same size as the original stack");
+    ASSERT_TEST(stack.top() == restoredStack.top(), "Restored stack should have the same top element as the original stack");
+}
+
+/**
+ * @brief Test exception handling
+ */
+void testExceptionHandling()
+{
+    std::cout << std::endl << MAGENTA << "TEST EXCEPTION HANDLING" << NC << std::endl;
+    MutantStack<int> stack;
+    try {
+        stack.pop();
+        ASSERT_TEST(false, "Exception should be thrown when popping from an empty stack");
+    } catch (const std::exception& e) {
+        ASSERT_TEST(true, "Exception thrown as expected");
+    }
+}
+
+/**
+ * @brief Test intensive usage
+ */
+void testIntensiveUsage()
+{
+    std::cout << std::endl << MAGENTA << "TEST INTENSIVE USAGE" << NC << std::endl;
+    MutantStack<int> stack;
+    for (int i = 0; i < 1000000; ++i) {
+        stack.push(i);
+    }
+    for (int i = 0; i < 1000000; ++i) {
+        stack.pop();
+    }
+    ASSERT_TEST(stack.empty(), "Stack should be empty after intensive usage");
+}
+
+/**
+ * @brief Test performance balance
+ */
+void testPerformanceBalance()
+{
+    std::cout << std::endl << MAGENTA << "TEST PERFORMANCE BALANCE" << NC << std::endl;
+    MutantStack<int> stack;
+    std::cout << "Pushing 1000 elements..." << std::endl;
+    for (int i = 0; i < 1000; ++i) {
+        stack.push(i);
+    }
+    ASSERT_TEST(stack.size() == 1000, "Stack size should be 1000 after pushing 1000 elements");
+
+    std::cout << "Popping 500 elements..." << std::endl;
+    for (int i = 0; i < 500; ++i) {
+        stack.pop();
+    }
+    ASSERT_TEST(stack.size() == 500, "Stack size should be 500 after popping 500 elements");
+
+    std::cout << "Pushing another 500 elements..." << std::endl;
+    for (int i = 0; i < 500; ++i) {
+        stack.push(i);
+    }
+    ASSERT_TEST(stack.size() == 1000, "Stack size should be 1000 after pushing another 500 elements");
+}
