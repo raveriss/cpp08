@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:44:41 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/14 01:23:21 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/14 01:36:51 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@
 
 /* Macro for asserting test results and displaying appropriate messages */
 #define ASSERT_TEST(expression, message) \
-    if (expression) { std::cout << GREEN "[TEST PASSED]" << NC << " " << message << std::endl; } \
+    if (expression) { std::cout << GREEN "[TEST PASSED]" << WHITE << BOLD << " " << message << NC << std::endl; } \
     else { std::cout << RED "[TEST FAILED]" << NC << " " << message << std::endl; }
 
 /* Function prototypes */
