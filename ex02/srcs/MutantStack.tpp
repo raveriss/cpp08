@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 15:28:55 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/13 17:33:21 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/13 19:09:58 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,12 @@ typename MutantStack<T>::const_iterator MutantStack<T>::end() const {
     return std::stack<T>::c.end();
 }
 
+template <typename T>
+void MutantStack<T>::pop() {
+    if (this->empty()) {
+        throw std::runtime_error("Cannot pop from an empty stack");
+    }
+    std::stack<T>::pop();
+}
 
 /* MutantStack.tpp */

@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:44:41 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/13 17:36:09 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/13 19:17:38 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -346,18 +346,19 @@ void testBackupAndRestore()
     ASSERT_TEST(stack.top() == restoredStack.top(), "Restored stack should have the same top element as the original stack");
 }
 
-/**
- * @brief Test exception handling
- */
 void testExceptionHandling()
 {
     std::cout << std::endl << MAGENTA << "TEST EXCEPTION HANDLING" << NC << std::endl;
     MutantStack<int> stack;
     try {
         stack.pop();
-        ASSERT_TEST(false, "Exception should be thrown when popping from an empty stack");
+        // Si nous arrivons ici, l'exception n'a pas été lancée, ce qui est une erreur
+        ASSERT_TEST(0, "Exception should be thrown when popping from an empty stack");
     } catch (const std::exception& e) {
-        ASSERT_TEST(true, "Exception thrown as expected");
+        // L'exception a été lancée comme prévu
+        std::string message = "Exception thrown as expected: ";
+        message += e.what();
+        ASSERT_TEST(1, message.c_str());
     }
 }
 
