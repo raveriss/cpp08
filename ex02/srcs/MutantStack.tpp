@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 15:28:55 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/13 19:09:58 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/13 22:48:05 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,22 @@ void MutantStack<T>::pop() {
         throw std::runtime_error("Cannot pop from an empty stack");
     }
     std::stack<T>::pop();
+}
+
+template <typename T>
+T& MutantStack<T>::top() {
+    if (this->empty()) {
+        throw std::runtime_error("Cannot access top of an empty stack");
+    }
+    return std::stack<T>::top();
+}
+
+template <typename T>
+const T& MutantStack<T>::top() const {
+    if (this->empty()) {
+        throw std::runtime_error("Cannot access top of an empty stack");
+    }
+    return std::stack<T>::top();
 }
 
 /* MutantStack.tpp */

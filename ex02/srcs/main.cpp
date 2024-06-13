@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:44:41 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/13 19:17:38 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/14 00:44:26 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,8 +140,11 @@ void testInitializationAndDestruction()
 {
     std::cout << MAGENTA << "TEST INITIALIZATION AND DESTRUCTION" << NC << std::endl;
     MutantStack<int> stack;
+    
+    /* Imprimer le contenu de la pile */
+    stack.printContainer(); 
+    
     ASSERT_TEST(stack.empty(), "Newly created stack should be empty");
-    // Destructor will be called automatically
 }
 
 /**
@@ -154,14 +157,26 @@ void testBasicOperations()
     stack.push(1);
     stack.push(2);
     stack.push(3);
+
+    /* Imprimer le contenu de la pile */
+    stack.printContainer(); 
+    
     ASSERT_TEST(stack.size() == 3, "Stack size should be 3 after pushing 3 elements");
     ASSERT_TEST(stack.top() == 3, "Top element should be 3");
     stack.pop();
+
+    /* Imprimer le contenu de la pile */
+    stack.printContainer(); 
+    
     ASSERT_TEST(stack.size() == 2, "Stack size should be 2 after popping one element");
     ASSERT_TEST(stack.top() == 2, "Top element should be 2 after popping");
     ASSERT_TEST(!stack.empty(), "Stack should not be empty");
     stack.pop();
     stack.pop();
+
+    /* Imprimer le contenu de la pile */
+    stack.printContainer(); 
+    
     ASSERT_TEST(stack.empty(), "Stack should be empty after popping all elements");
 }
 
@@ -175,6 +190,10 @@ void testIterators()
     stack.push(1);
     stack.push(2);
     stack.push(3);
+    
+    /* Imprimer le contenu de la pile */
+    stack.printContainer();    
+    
     MutantStack<int>::iterator it = stack.begin();
     ASSERT_TEST(*it == 1, "Begin iterator should point to the first element");
     ++it;
@@ -196,10 +215,18 @@ void testPerformance()
     for (int i = 0; i < 1000000; ++i) {
         stack.push(i);
     }
+
+    /* Imprimer le contenu de la pile */
+    stack.printLargeContainer();
+    
     ASSERT_TEST(stack.size() == 1000000, "Stack size should be 1000000 after pushing 1000000 elements");
     for (int i = 0; i < 1000000; ++i) {
         stack.pop();
     }
+
+    /* Imprimer le contenu de la pile */
+    stack.printContainer();     
+    
     ASSERT_TEST(stack.empty(), "Stack should be empty after popping all elements");
 }
 
@@ -213,11 +240,19 @@ void testRobustness()
     doubleStack.push(1.1);
     doubleStack.push(2.2);
     doubleStack.push(3.3);
+
+    /* Imprimer le contenu de la pile */
+    doubleStack.printContainer();  
+    
     ASSERT_TEST(doubleStack.size() == 3, "Double stack size should be 3");
 
     MutantStack<std::string> stringStack;
     stringStack.push("Hello");
     stringStack.push("World");
+
+    /* Imprimer le contenu de la pile */
+    stringStack.printContainer();  
+    
     ASSERT_TEST(stringStack.top() == "World", "Top element should be 'World'");
 }
 
@@ -236,6 +271,9 @@ void testComparison()
         vec.push_back(i);
         deq.push_back(i);
     }
+
+    /* Imprimer le contenu de la pile */
+    stack.printLargeContainer(); 
 
     ASSERT_TEST(stack.size() == vec.size(), "Stack size should match vector size");
     ASSERT_TEST(stack.size() == deq.size(), "Stack size should match deque size");
@@ -258,6 +296,10 @@ void testIntegration()
 
     // Copy elements from MutantStack to std::vector
     std::vector<int> vec(mstack.begin(), mstack.end());
+
+    /* Imprimer le contenu de la pile */
+    mstack.printContainer();  
+    
     ASSERT_TEST(vec.size() == 10, "Vector size should be 10 after copying from MutantStack");
     for (int i = 0; i < 10; ++i) {
         ASSERT_TEST(vec[i] == i, "Vector elements should match the elements pushed to MutantStack");
@@ -286,6 +328,10 @@ void testIntegration()
         mstack.pop();
         expected_value -= 2;
     }
+
+    /* Imprimer le contenu de la pile */
+    mstack.printContainer();      
+    
     ASSERT_TEST(allTestsPassed, "MutantStack elements should match modified vector elements after copying back");
 }
 
@@ -295,8 +341,9 @@ void testIntegration()
  */
 void testResilience()
 {
-    std::cout << std::endl << MAGENTA << "TEST RESILIENCE" << NC << std::endl;
+    std::cout << MAGENTA << std::endl << "TEST RESILIENCE" << NC << std::endl;
     bool allTestsPassed = true;
+
     for (int i = 0; i < 1000; ++i) {
         MutantStack<int> stack;
         for (int j = 0; j < 100; ++j) {
@@ -315,11 +362,10 @@ void testResilience()
         if (!stack.empty()) {
             allTestsPassed = false;
         }
-
     }
+
     ASSERT_TEST(allTestsPassed, "Test resilience completed successfully.");
 }
-
 
 /**
  * @brief Test backup and restore
@@ -342,6 +388,9 @@ void testBackupAndRestore()
         restoredStack.push(backup[i]);
     }
 
+    /* Imprimer le contenu de la pile */
+    stack.printContainer();  
+
     ASSERT_TEST(stack.size() == restoredStack.size(), "Restored stack should have the same size as the original stack");
     ASSERT_TEST(stack.top() == restoredStack.top(), "Restored stack should have the same top element as the original stack");
 }
@@ -350,6 +399,10 @@ void testExceptionHandling()
 {
     std::cout << std::endl << MAGENTA << "TEST EXCEPTION HANDLING" << NC << std::endl;
     MutantStack<int> stack;
+
+    /* Imprimer le contenu de la pile */
+    stack.printContainer(); 
+
     try {
         stack.pop();
         // Si nous arrivons ici, l'exception n'a pas été lancée, ce qui est une erreur
@@ -360,7 +413,19 @@ void testExceptionHandling()
         message += e.what();
         ASSERT_TEST(1, message.c_str());
     }
+
+    try {
+        stack.top();
+        // Si nous arrivons ici, l'exception n'a pas été lancée, ce qui est une erreur
+        ASSERT_TEST(0, "Exception should be thrown when accessing top of an empty stack");
+    } catch (const std::exception& e) {
+        // L'exception a été lancée comme prévu
+        std::string message = "Exception thrown as expected: ";
+        message += e.what();
+        ASSERT_TEST(1, message.c_str());
+    }
 }
+
 
 /**
  * @brief Test intensive usage
@@ -369,12 +434,23 @@ void testIntensiveUsage()
 {
     std::cout << std::endl << MAGENTA << "TEST INTENSIVE USAGE" << NC << std::endl;
     MutantStack<int> stack;
+
+    std::cout << BLUE << "Pushing 1000000 elements..." << NC << std::endl;
     for (int i = 0; i < 1000000; ++i) {
         stack.push(i);
     }
+
+    /* Imprimer le contenu de la pile */
+    stack.printLargeContainer();
+    
+    std::cout << BLUE << "\nPopping 1000000 elements..." << NC << std::endl;
     for (int i = 0; i < 1000000; ++i) {
         stack.pop();
     }
+
+    /* Imprimer le contenu de la pile */
+    stack.printLargeContainer();
+    
     ASSERT_TEST(stack.empty(), "Stack should be empty after intensive usage");
 }
 
@@ -385,21 +461,33 @@ void testPerformanceBalance()
 {
     std::cout << std::endl << MAGENTA << "TEST PERFORMANCE BALANCE" << NC << std::endl;
     MutantStack<int> stack;
-    std::cout << "Pushing 1000 elements..." << std::endl;
+    std::cout << BLUE << "Pushing 1000 elements..." << NC << std::endl;
     for (int i = 0; i < 1000; ++i) {
         stack.push(i);
     }
+
+    /* Imprimer le contenu de la pile */
+    stack.printLargeContainer();
+    
     ASSERT_TEST(stack.size() == 1000, "Stack size should be 1000 after pushing 1000 elements");
 
-    std::cout << "Popping 500 elements..." << std::endl;
+    std::cout << BLUE << "\nPopping 500 elements..." << NC << std::endl;
     for (int i = 0; i < 500; ++i) {
         stack.pop();
     }
+
+    /* Imprimer le contenu de la pile */
+    stack.printLargeContainer();
+    
     ASSERT_TEST(stack.size() == 500, "Stack size should be 500 after popping 500 elements");
 
-    std::cout << "Pushing another 500 elements..." << std::endl;
+    std::cout << BLUE << "\nPushing another 500 elements..." << NC << std::endl;
     for (int i = 0; i < 500; ++i) {
         stack.push(i);
     }
+
+    /* Imprimer le contenu de la pile */
+    stack.printLargeContainer();
+    
     ASSERT_TEST(stack.size() == 1000, "Stack size should be 1000 after pushing another 500 elements");
 }
