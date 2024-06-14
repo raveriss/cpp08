@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 18:38:45 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/13 00:12:24 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/14 02:37:59 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,12 @@ class Span
         unsigned int capacity() const;
         
         std::string print() const;
-        std::string printLargeContainer() const; // Ajout de la méthode
 
-        void clear(); // Ajout de la méthode clear
+        /* Ajout de la méthode */
+        std::string printLargeContainer() const;
+
+        /* Ajout de la méthode clear */
+        void clear();
 
 
         class SpanException : public std::exception

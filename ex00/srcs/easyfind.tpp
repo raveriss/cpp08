@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 18:02:56 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/11 18:35:13 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/14 02:35:11 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@
  */
 template <typename T>
 typename T::iterator easyfind(T &container, int value) {
-    // Vérifier que le conteneur contient des int
+    /* Vérifier que le conteneur contient des int */
     if (typeid(typename T::value_type) != typeid(int)) {
         throw std::runtime_error("Le conteneur doit contenir des valeurs de type int.");
     }

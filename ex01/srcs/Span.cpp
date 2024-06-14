@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 23:33:33 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/13 00:12:33 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/14 02:37:28 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,5 +169,6 @@ std::string Span::printLargeContainer() const
 
 void Span::clear()
 {
-    _data.clear(); // Vider le vecteur des données
+    /* Vider le vecteur des données */
+    _data.clear();
 }

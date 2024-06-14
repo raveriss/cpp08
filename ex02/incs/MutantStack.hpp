@@ -6,32 +6,46 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 15:29:11 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/14 00:06:57 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/14 02:40:27 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/* Directive pour éviter les inclusions multiples d'un fichier d'en-tête */
 #pragma once
 
+/* Inclure les fichiers de conteneurs stack */
 #include <stack>
+
+/* Inclure les fichiers de conteneurs iterator */
 #include <iterator>
+
+/* Inclure les fichiers pour l'utilisation de cout */
 #include <ostream>
+
+/* Inclure les fichiers pour l'utilisation de cout */
 #include <iostream>
 
+/**
+ * @brief MutantStack class
+ */
 template <typename T>
 class MutantStack : public std::stack<T> {
 public:
-    // Constructeur par défaut
+    /* Constructeur par défaut */
     MutantStack();
 
-    // Constructeur de recopie
+    /* Constructeur de recopie */
     MutantStack(const MutantStack<T>& other);
 
-    // Opérateur d’affectation
+    /* Opérateur d’affectation */
     MutantStack<T>& operator=(const MutantStack<T>& other);
 
-    // Destructeur
+    /* Destructeur */
     virtual ~MutantStack();
 
+    /**
+     * @brief Print the Container
+     */
     void printContainer() const {
         typename MutantStack<T>::container_type::const_iterator it = this->c.begin();
         std::cout << "[ ";
@@ -45,6 +59,9 @@ public:
         std::cout << " ]" << std::endl;
     }
 
+    /**
+     * @brief Print the Large Container
+     */
     void printLargeContainer() const
     {
         const_iterator it = this->c.begin();
@@ -90,6 +107,8 @@ public:
 
     /* Définition des itérateurs */
     typedef typename std::stack<T>::container_type::iterator iterator;
+
+    /* Définition des itérateurs const */
     typedef typename std::stack<T>::container_type::const_iterator const_iterator;
 
     iterator begin();
@@ -97,9 +116,10 @@ public:
     const_iterator begin() const;
     const_iterator end() const;
 
+    /* Méthode pop qui lance une exception si la pile est vide */
     void pop();
 
-    // Méthode top qui lance une exception si la pile est vide
+    /* Méthode top qui lance une exception si la pile est vide */
     T& top();
     const T& top() const;
 

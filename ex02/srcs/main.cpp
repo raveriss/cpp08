@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:44:41 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/14 01:36:51 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/14 02:38:48 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@
 
 /* Inclusion de la bibliothèque standard pour std::cstring */
 #include <cstring>
-
-#include <sstream>
 
 /* Definitions of ANSI color codes for console output */
 #define GREY        "\033[0;30m"
@@ -58,7 +56,9 @@
 #define BOLD           "\033[1m"
 #define UNDERLINE      "\033[4m"
 #define RESET          "\033[0m"
-#define NC             RESET  // No Color
+
+/* No Color */
+#define NC             RESET
 
 /* Define return values */
 #define ARG_ONE 2
@@ -100,9 +100,13 @@ int main(int argc, char *argv[])
         MutantStack<int> mstack;
         mstack.push(5);
         mstack.push(17);
-        std::cout << mstack.top() << std::endl; // Devrait afficher 17
+
+        /*  Devrait afficher 17 */
+        std::cout << mstack.top() << std::endl;
         mstack.pop();
-        std::cout << mstack.size() << std::endl; // Devrait afficher 1
+
+        /* Devrait afficher 1 */
+        std::cout << mstack.size() << std::endl;
         mstack.push(3);
         mstack.push(5);
         mstack.push(737);
@@ -309,15 +313,15 @@ void testIntegration()
 {
     std::cout << std::endl << MAGENTA << "TEST INTEGRATION" << NC << std::endl;
     
-    // Example use case: Copying elements between MutantStack and std::vector
+    /* Example use case: Copying elements between MutantStack and std::vector */
 
-    // Create a MutantStack and push some elements
+    /* Create a MutantStack and push some elements */
     MutantStack<int> mstack;
     for (int i = 0; i < 10; ++i) {
         mstack.push(i);
     }
 
-    // Copy elements from MutantStack to std::vector
+    /* Copy elements from MutantStack to std::vector */
     std::vector<int> vec(mstack.begin(), mstack.end());
 
     /* Imprimer le contenu de la pile */
@@ -328,12 +332,12 @@ void testIntegration()
         ASSERT_TEST(vec[i] == i, "Vector elements should match the elements pushed to MutantStack");
     }
 
-    // Modify the std::vector
+    /* Modify the std::vector */
     for (int i = 0; i < 10; ++i) {
         vec[i] = i * 2;
     }
 
-    // Clear the MutantStack and copy modified elements back from std::vector
+    /* Clear the MutantStack and copy modified elements back from std::vector */
     while (!mstack.empty()) {
         mstack.pop();
     }
@@ -341,7 +345,7 @@ void testIntegration()
         mstack.push(*it);
     }
 
-    // Verify the elements in MutantStack match the modified std::vector
+    /* Verify the elements in MutantStack match the modified std::vector */
     int expected_value = 18;
     bool allTestsPassed = true;
     while (!mstack.empty()) {
@@ -357,7 +361,6 @@ void testIntegration()
     
     ASSERT_TEST(allTestsPassed, "MutantStack elements should match modified vector elements after copying back");
 }
-
 
 /**
  * @brief Test resilience
@@ -426,29 +429,33 @@ void testExceptionHandling()
     /* Imprimer le contenu de la pile */
     stack.printContainer(); 
 
-    try {
+    try
+    {
         stack.pop();
-        // Si nous arrivons ici, l'exception n'a pas été lancée, ce qui est une erreur
+        /* Si nous arrivons ici, l'exception n'a pas été lancée, ce qui est une erreur */
         ASSERT_TEST(0, "Exception should be thrown when popping from an empty stack");
-    } catch (const std::exception& e) {
-        // L'exception a été lancée comme prévu
+    } catch (const std::exception& e)
+    {
+        /* L'exception a été lancée comme prévu */
         std::string message = "Exception thrown as expected: ";
         message += e.what();
         ASSERT_TEST(1, message.c_str());
     }
 
-    try {
+    try
+    {
         stack.top();
-        // Si nous arrivons ici, l'exception n'a pas été lancée, ce qui est une erreur
+        /* Si nous arrivons ici, l'exception n'a pas été lancée, ce qui est une erreur */
         ASSERT_TEST(0, "Exception should be thrown when accessing top of an empty stack");
-    } catch (const std::exception& e) {
-        // L'exception a été lancée comme prévu
+    }
+    catch (const std::exception& e)
+    {
+        /* L'exception a été lancée comme prévu */
         std::string message = "Exception thrown as expected: ";
         message += e.what();
         ASSERT_TEST(1, message.c_str());
     }
 }
-
 
 /**
  * @brief Test intensive usage
@@ -514,3 +521,5 @@ void testPerformanceBalance()
     
     ASSERT_TEST(stack.size() == 1000, "Stack size should be 1000 after pushing another 500 elements");
 }
+
+/* main.cpp */
