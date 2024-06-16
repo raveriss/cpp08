@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 18:38:45 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/14 02:37:59 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/15 16:08:39 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ class Span
 
         /* Ajout de la méthode clear */
         void clear();
-
 
         class SpanException : public std::exception
         {

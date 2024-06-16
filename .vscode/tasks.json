@@ -1,0 +1,74 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build_ex00",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-std=c++98",
+                "-Wall",
+                "-Wextra",
+                "-Werror",
+                "-g",
+                "${workspaceFolder}/ex00/srcs/*.cpp",
+                "-o",
+                "${workspaceFolder}/ex00/a.out"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "detail": "Build task for ex00"
+        },
+        {
+            "label": "build_ex01",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-std=c++98",
+                "-Wall",
+                "-Wextra",
+                "-Werror",
+                "-g",
+                "${workspaceFolder}/ex01/srcs/*.cpp",
+                "-o",
+                "${workspaceFolder}/ex01/a.out"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "detail": "Build task for ex01"
+        },
+        {
+            "label": "build_ex02",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-std=c++98",
+                "-Wall",
+                "-Wextra",
+                "-Werror",
+                "-g",
+                "${workspaceFolder}/ex02/srcs/*.cpp",
+                "-o",
+                "${workspaceFolder}/ex02/a.out"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "detail": "Build task for ex02"
+        }
+    ]
+}

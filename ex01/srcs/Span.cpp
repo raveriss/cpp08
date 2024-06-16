@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 23:33:33 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/14 02:37:28 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/14 13:33:18 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@
 /**
  * @brief Constructor
  */
-Span::Span(unsigned int n) :
-_n(n)
+Span::Span(unsigned int n)
+: _n(n)
 {}
 
 /**
  * @brief Copy constructor
  */
-Span::Span(const Span &other) :
-_n(other._n), _data(other._data)
+Span::Span(const Span &other)
+: _n(other._n), _data(other._data)
 {}
 
 /**

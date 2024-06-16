@@ -61,5 +61,6 @@
         "stop_token": "cpp",
         "thread": "cpp",
         "semaphore": "cpp"
-    }
+    },
+    "C_Cpp.default.compilerPath": "/usr/bin/clang"
 }
