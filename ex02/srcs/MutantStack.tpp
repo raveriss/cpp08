@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 15:28:55 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/17 11:15:43 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/17 20:45:20 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,24 +115,36 @@ void MutantStack<T>::printLargeContainer() const {
     std::cout << " ]" << std::endl;
 }
 
+/**
+ * @brief Renvoie un itérateur pointant après le dernier élément de la pile
+ */
 template <typename T>
 typename MutantStack<T>::iterator MutantStack<T>::end()
 {
     return std::stack<T>::c.end();
 }
 
+/**
+ * @brief Renvoie un itérateur constant pointant sur le premier élément de la pile
+ */
 template <typename T>
 typename MutantStack<T>::const_iterator MutantStack<T>::begin() const
 {
     return std::stack<T>::c.begin();
 }
 
+/**
+ * @brief Renvoie un itérateur constant pointant après le dernier élément de la pile
+ */
 template <typename T>
 typename MutantStack<T>::const_iterator MutantStack<T>::end() const
 {
     return std::stack<T>::c.end();
 }
 
+/**
+ * @brief Méthode pop qui lance une exception si la pile est vide
+ */
 template <typename T>
 void MutantStack<T>::pop()
 {
@@ -141,6 +153,9 @@ void MutantStack<T>::pop()
     std::stack<T>::pop();
 }
 
+/**
+ * @brief Méthode top qui lance une exception si la pile est vide
+ */
 template <typename T>
 T& MutantStack<T>::top()
 {
@@ -149,7 +164,9 @@ T& MutantStack<T>::top()
     return std::stack<T>::top();
 }
 
-
+/**
+ * @brief Méthode top const qui lance une exception si la pile est vide
+ */
 template <typename T>
 const T& MutantStack<T>::top() const
 {

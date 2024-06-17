@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 23:33:33 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/17 13:51:42 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/17 20:26:29 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,7 @@ Span::~Span()
 void Span::addNumber(int number)
 {
     if (_data.size() >= _n)
-    {
         throw SpanException("Span is full");
-    }
     _data.push_back(number);
 }
 
@@ -64,9 +62,7 @@ void Span::addNumber(int number)
 int Span::shortestSpan() const
 {
     if (_data.size() < 2)
-    {
         throw SpanException("Not enough elements to find a span");
-    }
     std::vector<int> sorted = _data;
     std::sort(sorted.begin(), sorted.end());
     int shortest = sorted[1] - sorted[0];
@@ -74,9 +70,7 @@ int Span::shortestSpan() const
     {
         int span = sorted[i + 1] - sorted[i];
         if (span < shortest)
-        {
             shortest = span;
-        }
     }
     return shortest;
 }
@@ -87,9 +81,7 @@ int Span::shortestSpan() const
 int Span::longestSpan() const
 {
     if (_data.size() < 2)
-    {
         throw SpanException("Not enough elements to find a span");
-    }
     int min = *std::min_element(_data.begin(), _data.end());
     int max = *std::max_element(_data.begin(), _data.end());
     return max - min;
@@ -167,6 +159,9 @@ std::string Span::printLargeContainer() const
     return oss.str();
 }
 
+/**
+ * @brief clear the Span object
+ */
 void Span::clear()
 {
     /* Vider le vecteur des données */

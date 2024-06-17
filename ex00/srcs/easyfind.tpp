@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 18:02:56 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/14 02:35:11 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/17 20:04:26 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,15 @@
  * @brief Fonction qui recherche une valeur dans un conteneur
  */
 template <typename T>
-typename T::iterator easyfind(T &container, int value) {
+typename T::iterator easyfind(T &container, int value)
+{
     /* Vérifier que le conteneur contient des int */
-    if (typeid(typename T::value_type) != typeid(int)) {
+    if (typeid(typename T::value_type) != typeid(int))
         throw std::runtime_error("Le conteneur doit contenir des valeurs de type int.");
-    }
 
     typename T::iterator it = std::find(container.begin(), container.end(), value);
-    if (it == container.end()) {
+    if (it == container.end())
         throw std::runtime_error("Value not found");
-    }
     return it;
 }
 

@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:44:41 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/13 00:40:02 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/17 19:54:40 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void captureAndCompareOutput(void (*func)(), const std::string& expected, const 
  */
 void testConstructorValidCapacity()
 {
+    
     Span sp(5);
     std::cout << sp.print() << std::endl;
     ASSERT_TEST(sp.size() == 0, "Span should be initialized with size 0");
