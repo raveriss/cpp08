@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 18:38:45 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/15 16:08:39 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/17 13:45:16 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,41 +31,65 @@
 class Span
 {
     private:
+        /* Size max of the container */
         unsigned int _n;
+
+        /* Data container */
         std::vector<int> _data;
 
     public:
+        /* Constructeurs par paramétrique */
         Span(unsigned int n);
+
+        /* Constructeur par copie */
         Span(const Span &other);
+
+        /* Surcharge de l'opérateur = */
         Span &operator=(const Span &other);
+
+        /* Destructeur */
         ~Span();
 
+        /* Add numbers to the Span object */
         void addNumber(int number);
         
+        /* Add numbers to the Span object */
         template <typename Iterator>
         void addNumbers(Iterator begin, Iterator end);
 
+        /* Shortest span */
         int shortestSpan() const;
+
+        /* Longest span */
         int longestSpan() const;
 
+        /* Ajout de la méthode size */
         unsigned int size() const;
+
+        /* Ajout de la méthode capacity */
         unsigned int capacity() const;
         
+        /* Ajout de la méthode print */
         std::string print() const;
 
-        /* Ajout de la méthode */
+        /* Ajout de la méthode printLargeContainer */
         std::string printLargeContainer() const;
 
         /* Ajout de la méthode clear */
         void clear();
 
+        /* Exception pour la classe Span */
         class SpanException : public std::exception
         {
             private:
+                /* Message d'erreur */
                 const char* _msg;
             public:
-                SpanException(const char* msg) : _msg(msg) {}
-                virtual const char* what() const throw() { return _msg; }
+                /* Constructeur avec message */
+                SpanException(const char* msg);
+
+                /* Renvoie le message d'erreur */
+                virtual const char* what() const throw();
         };
 };
 

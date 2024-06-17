@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:44:41 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/14 02:38:48 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/17 13:26:12 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,92 +73,6 @@
 #define ASSERT_TEST(expression, message) \
     if (expression) { std::cout << GREEN "[TEST PASSED]" << WHITE << BOLD << " " << message << NC << std::endl; } \
     else { std::cout << RED "[TEST FAILED]" << NC << " " << message << std::endl; }
-
-/* Function prototypes */
-void runTests();
-void testInitializationAndDestruction();
-void testBasicOperations();
-void testIterators();
-void testPerformance();
-void testRobustness();
-void testComparison();
-void testIntegration();
-void testResilience();
-void testBackupAndRestore();
-void testExceptionHandling();
-void testIntensiveUsage();
-void testPerformanceBalance();
-
-/**
- * @brief Main function
- */
-int main(int argc, char *argv[])
-{
-    if (argc == NO_ARGUMENTS)
-    {
-        /* Code pour les tests de base (équivalent au mode "MANDATORY") */
-        MutantStack<int> mstack;
-        mstack.push(5);
-        mstack.push(17);
-
-        /*  Devrait afficher 17 */
-        std::cout << mstack.top() << std::endl;
-        mstack.pop();
-
-        /* Devrait afficher 1 */
-        std::cout << mstack.size() << std::endl;
-        mstack.push(3);
-        mstack.push(5);
-        mstack.push(737);
-        mstack.push(0);
-
-        MutantStack<int>::iterator it = mstack.begin();
-        MutantStack<int>::iterator ite = mstack.end();
-        ++it;
-        --it;
-        while (it != ite) {
-            std::cout << *it << std::endl;
-            ++it;
-        }
-
-        std::stack<int> s(mstack);
-    }
-    else if (argc == ARG_ONE && strcmp(argv[FIRST_ARGUMENT], TEST_ARG) == STRING_COMPARE_SUCCESS)
-    {
-        /* Code pour les tests détaillés (équivalent au mode "OPTIONNEL") */
-        std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */" << NC << std::endl;
-        std::cout << CYAN << "/*                                 OPTIONNEL                                  */" << NC << std::endl;
-        std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */\n" << NC << std::endl;
-
-        runTests();
-    }
-    else
-    {
-        std::cout << RED << "Usage: ./mutantstack or ./mutantstack tester" << NC << std::endl;
-        return RETURN_FAILURE;
-    }
-    
-    return RETURN_SUCCESS;
-}
-
-/**
- * @brief Run all tests
- */
-void runTests()
-{
-    testInitializationAndDestruction();
-    testBasicOperations();
-    testIterators();
-    testPerformance();
-    testRobustness();
-    testComparison();
-    testIntegration();
-    testResilience();
-    testBackupAndRestore();
-    testExceptionHandling();
-    testIntensiveUsage();
-    testPerformanceBalance();
-}
 
 /**
  * @brief Test initialization and destruction
@@ -520,6 +434,79 @@ void testPerformanceBalance()
     stack.printLargeContainer();
     
     ASSERT_TEST(stack.size() == 1000, "Stack size should be 1000 after pushing another 500 elements");
+}
+
+/**
+ * @brief Run all tests
+ */
+void runTests()
+{
+    testInitializationAndDestruction();
+    testBasicOperations();
+    testIterators();
+    testPerformance();
+    testRobustness();
+    testComparison();
+    testIntegration();
+    testResilience();
+    testBackupAndRestore();
+    testExceptionHandling();
+    testIntensiveUsage();
+    testPerformanceBalance();
+}
+
+
+
+/**
+ * @brief Main function
+ */
+int main(int argc, char *argv[])
+{
+    if (argc == NO_ARGUMENTS)
+    {
+        /* Code pour les tests de base (équivalent au mode "MANDATORY") */
+        MutantStack<int> mstack;
+        mstack.push(5);
+        mstack.push(17);
+
+        /*  Devrait afficher 17 */
+        std::cout << mstack.top() << std::endl;
+        mstack.pop();
+
+        /* Devrait afficher 1 */
+        std::cout << mstack.size() << std::endl;
+        mstack.push(3);
+        mstack.push(5);
+        mstack.push(737);
+        mstack.push(0);
+
+        MutantStack<int>::iterator it = mstack.begin();
+        MutantStack<int>::iterator ite = mstack.end();
+        ++it;
+        --it;
+        while (it != ite) {
+            std::cout << *it << std::endl;
+            ++it;
+        }
+
+        std::stack<int> s(mstack);
+    }
+    else if (argc == ARG_ONE && strcmp(argv[FIRST_ARGUMENT], TEST_ARG) == STRING_COMPARE_SUCCESS)
+    {
+        /* Code pour les tests détaillés (équivalent au mode "OPTIONNEL") */
+        std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */" << NC << std::endl;
+        std::cout << CYAN << "/*                                 OPTIONNEL                                  */" << NC << std::endl;
+        std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */\n" << NC << std::endl;
+
+        runTests();
+    }
+    else
+    {
+        std::cout << RED << "Usage: ./mutantstack or ./mutantstack tester" << NC << std::endl;
+        return RETURN_FAILURE;
+    }
+    
+    return RETURN_SUCCESS;
 }
 
 /* main.cpp */

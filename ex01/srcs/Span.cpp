@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 23:33:33 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/14 13:33:18 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/17 11:28:45 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,4 +171,22 @@ void Span::clear()
 {
     /* Vider le vecteur des données */
     _data.clear();
+}
+
+/**
+ * @brief Construct a new Span:: Span Exception:: Span Exception object
+ * @param msg 
+ */
+Span::SpanException::SpanException(const char* msg)
+: _msg(msg)
+{}
+
+/**
+ * @brief Returns a C-style string describing the exception.
+ * 
+ * @return const char* A C-style string describing the exception.
+ */
+const char* Span::SpanException::what() const throw()
+{
+    return _msg;
 }
