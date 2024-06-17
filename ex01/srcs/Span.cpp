@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 23:33:33 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/17 11:28:45 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/17 13:51:42 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,7 +183,6 @@ Span::SpanException::SpanException(const char* msg)
 
 /**
  * @brief Returns a C-style string describing the exception.
- * 
  * @return const char* A C-style string describing the exception.
  */
 const char* Span::SpanException::what() const throw()

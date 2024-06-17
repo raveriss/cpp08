@@ -62,5 +62,10 @@
         "thread": "cpp",
         "semaphore": "cpp"
     },
-    "C_Cpp.default.compilerPath": "/usr/bin/clang"
+    "C_Cpp.default.compilerPath": "/usr/bin/clang",
+    "editor.tokenColorCustomizations": {
+        "comments": "",
+        "textMateRules": []
+    },
+    "C_Cpp.intelliSenseEngineFallback": "enabled"
 }
