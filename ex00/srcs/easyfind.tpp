@@ -6,22 +6,12 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 18:02:56 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/17 20:04:26 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/18 19:55:20 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* Directive pour éviter les inclusions multiples d'un fichier d'en-tête */
 #pragma once
-
-/* Definitions of ANSI color codes for console output */
-#define GREY        "\033[0;30m"
-#define RED         "\033[0;31m"
-#define GREEN       "\033[0;32m"
-#define YELLOW      "\033[0;33m"
-#define BLUE        "\033[0;34m"
-#define MAGENTA     "\033[0;35m"
-#define CYAN        "\033[0;36m"
-#define NC          "\033[0m"
 
 /* Inclure les fichiers .hpp nécessaires */
 #include "../incs/easyfind.hpp"
@@ -32,13 +22,8 @@
 /* Inclure les fichiers typeinfo pour la gestion des types */
 #include <typeinfo>
 
-/* Macro for asserting test results and displaying appropriate messages */
-#define ASSERT_TEST(expression, message) \
-	if (expression) { std::cout << GREEN "[TEST PASSED]" << NC << " " << message << std::endl; } \
-	else { std::cout << RED "[TEST FAILED]" << NC << " " << message << std::endl; }
-
 /**
- * @brief Fonction qui recherche une valeur dans un conteneur
+ * @brief Fonction qui retourne un itérateur sur la première occurrence de la valeur recherchée
  */
 template <typename T>
 typename T::iterator easyfind(T &container, int value)
