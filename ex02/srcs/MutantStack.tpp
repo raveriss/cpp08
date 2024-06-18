@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 15:28:55 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/17 20:45:20 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/18 20:23:11 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,13 @@ template <typename T>
 void MutantStack<T>::printContainer() const {
     typename MutantStack<T>::container_type::const_iterator it = this->c.begin();
     std::cout << "[ ";
-    if (it != this->c.end()) {
+    if (it != this->c.end())
+    {
         std::cout << *it;
         ++it;
     }
-    for (; it != this->c.end(); ++it) {
+    for (; it != this->c.end(); ++it)
+    {
         std::cout << ", " << *it;
     }
     std::cout << " ]" << std::endl;
@@ -87,25 +89,30 @@ void MutantStack<T>::printLargeContainer() const {
 
     std::cout << "[ ";
 
-    if (size <= 6) {
-        for (; it != this->c.end(); ++it) {
+    if (size <= 6)
+    {
+        for (; it != this->c.end(); ++it)
+        {
             std::cout << *it;
             if (it != --this->c.end())
                 std::cout << ", ";
         }
     } else {
-        for (i = 0; i < 3 && it != this->c.end(); ++i, ++it) {
+        for (i = 0; i < 3 && it != this->c.end(); ++i, ++it)
+        {
             std::cout << *it << ", ";
         }
 
         std::cout << "..., ";
 
         it = this->c.end();
-        for (i = 0; i < 3; ++i) {
+        for (i = 0; i < 3; ++i)
+        {
             --it;
         }
 
-        for (; it != this->c.end(); ++it) {
+        for (; it != this->c.end(); ++it)
+        {
             std::cout << *it;
             if (it != --this->c.end())
                 std::cout << ", ";

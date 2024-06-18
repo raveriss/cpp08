@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:44:41 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/18 19:16:05 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/18 20:22:27 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,8 @@ void testPerformance()
 {
     std::cout << std::endl << MAGENTA << "TEST PERFORMANCE" << NC << std::endl;
     MutantStack<int> stack;
-    for (int i = 0; i < 1000000; ++i) {
+    for (int i = 0; i < 1000000; ++i)
+    {
         stack.push(i);
     }
 
@@ -161,7 +162,8 @@ void testPerformance()
     stack.printLargeContainer();
     
     ASSERT_TEST(stack.size() == 1000000, "Stack size should be 1000000 after pushing 1000000 elements");
-    for (int i = 0; i < 1000000; ++i) {
+    for (int i = 0; i < 1000000; ++i)
+    {
         stack.pop();
     }
 
@@ -207,7 +209,8 @@ void testComparison()
     std::vector<int> vec;
     std::deque<int> deq;
 
-    for (int i = 0; i < 1000; ++i) {
+    for (int i = 0; i < 1000; ++i)
+    {
         stack.push(i);
         vec.push_back(i);
         deq.push_back(i);
@@ -231,7 +234,8 @@ void testIntegration()
 
     /* Create a MutantStack and push some elements */
     MutantStack<int> mstack;
-    for (int i = 0; i < 10; ++i) {
+    for (int i = 0; i < 10; ++i)
+    {
         mstack.push(i);
     }
 
@@ -242,30 +246,34 @@ void testIntegration()
     mstack.printContainer();  
     
     ASSERT_TEST(vec.size() == 10, "Vector size should be 10 after copying from MutantStack");
-    for (int i = 0; i < 10; ++i) {
+    for (int i = 0; i < 10; ++i)
+    {
         ASSERT_TEST(vec[i] == i, "Vector elements should match the elements pushed to MutantStack");
     }
 
     /* Modify the std::vector */
-    for (int i = 0; i < 10; ++i) {
+    for (int i = 0; i < 10; ++i)
+    {
         vec[i] = i * 2;
     }
 
     /* Clear the MutantStack and copy modified elements back from std::vector */
-    while (!mstack.empty()) {
+    while (!mstack.empty())
+    {
         mstack.pop();
     }
-    for (std::vector<int>::iterator it = vec.begin(); it != vec.end(); ++it) {
+    for (std::vector<int>::iterator it = vec.begin(); it != vec.end(); ++it)
+    {
         mstack.push(*it);
     }
 
     /* Verify the elements in MutantStack match the modified std::vector */
     int expected_value = 18;
     bool allTestsPassed = true;
-    while (!mstack.empty()) {
-        if (mstack.top() != expected_value) {
+    while (!mstack.empty())
+    {
+        if (mstack.top() != expected_value)
             allTestsPassed = false;
-        }
         mstack.pop();
         expected_value -= 2;
     }
@@ -284,24 +292,26 @@ void testResilience()
     std::cout << MAGENTA << std::endl << "TEST RESILIENCE" << NC << std::endl;
     bool allTestsPassed = true;
 
-    for (int i = 0; i < 1000; ++i) {
+    for (int i = 0; i < 1000; ++i)
+    {
         MutantStack<int> stack;
-        for (int j = 0; j < 100; ++j) {
+        for (int j = 0; j < 100; ++j)
+        {
             stack.push(j);
         }
-        if (stack.size() != 100) {
+        if (stack.size() != 100)
+        {
             allTestsPassed = false;
         }
 
-        for (int j = 99; j >= 0; --j) {
-            if (stack.top() != j) {
+        for (int j = 99; j >= 0; --j)
+        {
+            if (stack.top() != j)
                 allTestsPassed = false;
-            }
             stack.pop();
         }
-        if (!stack.empty()) {
+        if (!stack.empty())
             allTestsPassed = false;
-        }
     }
 
     ASSERT_TEST(allTestsPassed, "Test resilience completed successfully.");
@@ -319,12 +329,14 @@ void testBackupAndRestore()
     stack.push(3);
 
     std::vector<int> backup;
-    for (MutantStack<int>::iterator it = stack.begin(); it != stack.end(); ++it) {
+    for (MutantStack<int>::iterator it = stack.begin(); it != stack.end(); ++it)
+    {
         backup.push_back(*it);
     }
 
     MutantStack<int> restoredStack;
-    for (size_t i = 0; i < backup.size(); ++i) {
+    for (size_t i = 0; i < backup.size(); ++i)
+    {
         restoredStack.push(backup[i]);
     }
 
@@ -383,7 +395,8 @@ void testIntensiveUsage()
     MutantStack<int> stack;
 
     std::cout << BRIGHT_CYAN << "Pushing 1000000 elements..." << NC << std::endl;
-    for (int i = 0; i < 1000000; ++i) {
+    for (int i = 0; i < 1000000; ++i)
+    {
         stack.push(i);
     }
 
@@ -391,7 +404,8 @@ void testIntensiveUsage()
     stack.printLargeContainer();
     
     std::cout << BRIGHT_CYAN << "\nPopping 1000000 elements..." << NC << std::endl;
-    for (int i = 0; i < 1000000; ++i) {
+    for (int i = 0; i < 1000000; ++i)
+    {
         stack.pop();
     }
 
@@ -409,7 +423,8 @@ void testPerformanceBalance()
     std::cout << std::endl << MAGENTA << "TEST PERFORMANCE BALANCE" << NC << std::endl;
     MutantStack<int> stack;
     std::cout << BRIGHT_CYAN << "Pushing 1000 elements..." << NC << std::endl;
-    for (int i = 0; i < 1000; ++i) {
+    for (int i = 0; i < 1000; ++i)
+    {
         stack.push(i);
     }
 
@@ -419,7 +434,8 @@ void testPerformanceBalance()
     ASSERT_TEST(stack.size() == 1000, "Stack size should be 1000 after pushing 1000 elements");
 
     std::cout << BRIGHT_CYAN << "\nPopping 500 elements..." << NC << std::endl;
-    for (int i = 0; i < 500; ++i) {
+    for (int i = 0; i < 500; ++i)
+    {
         stack.pop();
     }
 
@@ -429,7 +445,8 @@ void testPerformanceBalance()
     ASSERT_TEST(stack.size() == 500, "Stack size should be 500 after popping 500 elements");
 
     std::cout << BRIGHT_CYAN << "\nPushing another 500 elements..." << NC << std::endl;
-    for (int i = 0; i < 500; ++i) {
+    for (int i = 0; i < 500; ++i)
+    {
         stack.push(i);
     }
 
@@ -487,7 +504,8 @@ int main(int argc, char *argv[])
         MutantStack<int>::iterator ite = mstack.end();
         ++it;
         --it;
-        while (it != ite) {
+        while (it != ite)
+        {
             std::cout << *it << std::endl;
             ++it;
         }
