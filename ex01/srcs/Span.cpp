@@ -6,11 +6,14 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 23:33:33 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/18 17:41:18 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/18 19:13:55 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/* Inclusion pour la classe Span */
 #include "../incs/Span.hpp"
+
+/* Inclusion pour les flux de sortie */
 #include <sstream>
 
 /* Inclusion pour les exceptions standard */
@@ -80,7 +83,6 @@ long long Span::shortestSpan() const
     return shortest;
 }
 
-
 /**
  * @brief Find the longest span between the elements in the Span object
  */
@@ -92,7 +94,6 @@ long long Span::longestSpan() const
     int max = *std::max_element(_data.begin(), _data.end());
     return static_cast<long long>(max) - static_cast<long long>(min);
 }
-
 
 /**
  * @brief Get the size of the Span object

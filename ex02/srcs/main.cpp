@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:44:41 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/17 13:26:12 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/18 19:16:05 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -335,6 +335,9 @@ void testBackupAndRestore()
     ASSERT_TEST(stack.top() == restoredStack.top(), "Restored stack should have the same top element as the original stack");
 }
 
+/**
+ * @brief Test exception handling
+ */
 void testExceptionHandling()
 {
     std::cout << std::endl << MAGENTA << "TEST EXCEPTION HANDLING" << NC << std::endl;

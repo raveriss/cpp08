@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:44:41 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/18 17:27:52 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/18 19:07:31 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -441,7 +441,6 @@ void testAddNumberBeyondIntMin()
         ASSERT_TEST(true, "Exception thrown as expected");
     }
 }
-
 
 /**
  * @brief Test adding INT_MAX and INT_MIN values
