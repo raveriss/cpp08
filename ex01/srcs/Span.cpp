@@ -6,12 +6,15 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 23:33:33 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/17 20:26:29 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/18 17:41:18 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/Span.hpp"
 #include <sstream>
+
+/* Inclusion pour les exceptions standard */
+#include <stdexcept>
 
 /**
  * @brief Constructor
@@ -49,43 +52,47 @@ Span::~Span()
 /**
  * @brief Add a number to the Span object
  */
-void Span::addNumber(int number)
+void Span::addNumber(long long number)
 {
     if (_data.size() >= _n)
         throw SpanException("Span is full");
+    if (number > std::numeric_limits<int>::max() || number < std::numeric_limits<int>::min())
+        throw SpanException("Number is out of int range");
     _data.push_back(number);
 }
 
 /**
  * @brief Find the shortest span between the elements in the Span object
  */
-int Span::shortestSpan() const
+long long Span::shortestSpan() const
 {
     if (_data.size() < 2)
         throw SpanException("Not enough elements to find a span");
     std::vector<int> sorted = _data;
     std::sort(sorted.begin(), sorted.end());
-    int shortest = sorted[1] - sorted[0];
+    long long shortest = static_cast<long long>(sorted[1]) - static_cast<long long>(sorted[0]);
     for (size_t i = 1; i < sorted.size() - 1; ++i)
     {
-        int span = sorted[i + 1] - sorted[i];
+        long long span = static_cast<long long>(sorted[i + 1]) - static_cast<long long>(sorted[i]);
         if (span < shortest)
             shortest = span;
     }
     return shortest;
 }
 
+
 /**
  * @brief Find the longest span between the elements in the Span object
  */
-int Span::longestSpan() const
+long long Span::longestSpan() const
 {
     if (_data.size() < 2)
         throw SpanException("Not enough elements to find a span");
     int min = *std::min_element(_data.begin(), _data.end());
     int max = *std::max_element(_data.begin(), _data.end());
-    return max - min;
+    return static_cast<long long>(max) - static_cast<long long>(min);
 }
+
 
 /**
  * @brief Get the size of the Span object

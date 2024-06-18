@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:44:41 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/17 19:54:40 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/18 17:27:52 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@
 
 /* Inclusion de la bibliothèque standard pour std::strcmp */
 #include <cstring>
+
+/* Pour std::numeric_limits */
+#include <limits>
 
 /* Definitions of ANSI color codes for console output */
 #define GREY        "\033[0;30m"
@@ -404,6 +407,68 @@ void testClearAndReuse()
 }
 
 /**
+ * @brief Test adding a number greater than the maximum int value
+ */
+void testAddNumberBeyondIntMax()
+{
+    Span sp(5);
+    try
+    {
+        sp.addNumber(std::numeric_limits<int>::max() + 1LL); // Utilisation de long long pour dépasser int
+        ASSERT_TEST(false, "Exception should be thrown when adding a number greater than max int value");
+    }
+    catch(const std::exception& e)
+    {
+        std::cout << "Caught exception: " << e.what() << std::endl;
+        ASSERT_TEST(true, "Exception thrown as expected");
+    }
+}
+
+/**
+ * @brief Test adding a number less than the minimum int value
+ */
+void testAddNumberBeyondIntMin()
+{
+    Span sp(5);
+    try
+    {
+        sp.addNumber(static_cast<long long>(std::numeric_limits<int>::min()) - 1); // Utilisation de long long pour dépasser int
+        ASSERT_TEST(false, "Exception should be thrown when adding a number less than min int value");
+    }
+    catch(const std::exception& e)
+    {
+        std::cout << "Caught exception: " << e.what() << std::endl;
+        ASSERT_TEST(true, "Exception thrown as expected");
+    }
+}
+
+
+/**
+ * @brief Test adding INT_MAX and INT_MIN values
+ */
+void testIntMaxAndIntMin()
+{
+    Span sp(2);
+    sp.addNumber(std::numeric_limits<int>::max());
+    sp.addNumber(std::numeric_limits<int>::min());
+    
+    std::cout << sp.print() << std::endl;
+
+    long long shortestSpan = sp.shortestSpan();
+    long long longestSpan = sp.longestSpan();
+    
+    std::cout << "Shortest span: " << shortestSpan << std::endl;
+    std::cout << "Longest span: " << longestSpan << std::endl;
+
+    // La différence entre INT_MAX et INT_MIN
+    long long expectedSpan = static_cast<long long>(std::numeric_limits<int>::max()) - static_cast<long long>(std::numeric_limits<int>::min());
+
+    // Comme la plus petite différence ne peut pas être plus grande que la plus grande différence, nous vérifions aussi cette condition.
+    ASSERT_TEST(shortestSpan >= 0, "Shortest span should be non-negative");
+    ASSERT_TEST(longestSpan == expectedSpan, "Longest span should handle INT_MAX and INT_MIN correctly");
+}
+
+/**
  * @brief Main function
  */
 int main(int argc, char *argv[])
@@ -504,6 +569,18 @@ int main(int argc, char *argv[])
         /* Test clear and reuse */
         std::cout << std::endl << MAGENTA << "TEST CLEAR AND RE-USE" << NC << std::endl;
         testClearAndReuse();
+
+        /* Test beyond int min */
+        std::cout << std::endl << MAGENTA << "TEST BEYOND INT MIN" << NC << std::endl;
+        testAddNumberBeyondIntMin();
+
+        /* Test beyond int max */
+        std::cout << std::endl << MAGENTA << "TEST BEYOND INT MAX" << NC << std::endl;
+        testAddNumberBeyondIntMax();
+
+        /* Test int max and int min */
+        std::cout << std::endl << MAGENTA << "TEST INT MAX AND INT MIN" << NC << std::endl;
+        testIntMaxAndIntMin();
     }
     else
     {

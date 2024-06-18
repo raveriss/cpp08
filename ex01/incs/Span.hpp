@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 18:38:45 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/17 13:45:16 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/18 17:21:46 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,18 @@ class Span
         ~Span();
 
         /* Add numbers to the Span object */
-        void addNumber(int number);
+        void addNumber(long long number);
+
         
         /* Add numbers to the Span object */
         template <typename Iterator>
         void addNumbers(Iterator begin, Iterator end);
 
         /* Shortest span */
-        int shortestSpan() const;
+        long long shortestSpan() const;
 
         /* Longest span */
-        int longestSpan() const;
+        long long longestSpan() const;
 
         /* Ajout de la méthode size */
         unsigned int size() const;
