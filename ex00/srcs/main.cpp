@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 00:02:28 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/19 14:22:47 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/19 16:29:15 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -603,49 +603,6 @@ void testAddNumberBeyondIntMax()
         ASSERT_TEST(false, "Unexpected exception type");
     }
 }
-
-/**
- * @brief Test adding a number less than the minimum int value
- */
-// void testAddNumberBeyondIntMin()
-// {
-//     std::vector vec;
-//     try
-//     {
-//         sp.addNumber(static_cast<long long>(std::numeric_limits<int>::min()) - 1); // Utilisation de long long pour dépasser int
-//         ASSERT_TEST(false, "Exception should be thrown when adding a number less than min int value");
-//     }
-//     catch(const std::exception& e)
-//     {
-//         std::cout << "Caught exception: " << e.what() << std::endl;
-//         ASSERT_TEST(true, "Exception thrown as expected");
-//     }
-// }
-
-/**
- * @brief Test adding INT_MAX and INT_MIN values
- */
-// void testIntMaxAndIntMin()
-// {
-//     Span sp(2);
-//     sp.addNumber(std::numeric_limits<int>::max());
-//     sp.addNumber(std::numeric_limits<int>::min());
-    
-//     std::cout << sp.print() << std::endl;
-
-//     long long shortestSpan = sp.shortestSpan();
-//     long long longestSpan = sp.longestSpan();
-    
-//     std::cout << "Shortest span: " << shortestSpan << std::endl;
-//     std::cout << "Longest span: " << longestSpan << std::endl;
-
-//     // La différence entre INT_MAX et INT_MIN
-//     long long expectedSpan = static_cast<long long>(std::numeric_limits<int>::max()) - static_cast<long long>(std::numeric_limits<int>::min());
-
-//     // Comme la plus petite différence ne peut pas être plus grande que la plus grande différence, nous vérifions aussi cette condition.
-//     ASSERT_TEST(shortestSpan >= 0, "Shortest span should be non-negative");
-//     ASSERT_TEST(longestSpan == expectedSpan, "Longest span should handle INT_MAX and INT_MIN correctly");
-// }
 
 /**
  * @brief Main function
