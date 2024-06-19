@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 00:02:28 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/19 16:29:15 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/19 19:33:19 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -577,34 +577,6 @@ void testEasyFindMultipleOccurrences()
 }
 
 /**
- * @brief Test adding a number greater than the maximum int value
- */
-void testAddNumberBeyondIntMax()
-{
-    std::vector<int> vec;
-    vec.push_back(1);  // Ajouter un élément pour tester le find
-
-    /* Print the elements of the vector */
-    printContainer(vec);
-
-    try
-    {
-        easyfind(vec, static_cast<long long>(std::numeric_limits<int>::max()) + 1);
-        ASSERT_TEST(false, "Exception should be thrown when adding a number greater than max int value");
-    }
-    catch(const std::overflow_error& e)
-    {
-        std::cout << CYAN << "Caught exception: " << e.what() << NC << std::endl;
-        ASSERT_TEST(true, "Exception thrown as expected");
-    }
-    catch(const std::exception& e)
-    {
-        std::cout << CYAN << "Caught unexpected exception: " << e.what() << NC << std::endl;
-        ASSERT_TEST(false, "Unexpected exception type");
-    }
-}
-
-/**
  * @brief Main function
  */
 int main(int argc, char *argv[])
@@ -723,10 +695,6 @@ int main(int argc, char *argv[])
 
         /* Test the easyfind function with multiple occurrences of an element */
 		testEasyFindMultipleOccurrences();
-
-        std::cout << std::endl << MAGENTA << "TEST ADD NUMBER BEYOND INT MAX" << NC << std::endl;
-        /* Test adding a number greater than the maximum int value */
-        testAddNumberBeyondIntMax();
 	}
 	else
 	{

@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 18:02:56 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/19 16:30:56 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/19 19:30:59 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 #include <iostream>
 
 template <typename T>
-typename T::iterator easyfind(T &container, long long value)
+typename T::iterator easyfind(T &container, int value)
 {
     /* Vérifier que le conteneur contient des int */
     if (typeid(typename T::value_type) != typeid(int))
@@ -38,19 +38,6 @@ typename T::iterator easyfind(T &container, long long value)
     if (it == container.end())
         throw std::runtime_error("Value not found");
     return it;
-}
-
-
-/**
- * @brief Ajoute un élément dans un vecteur en vérifiant les limites d'un int
- */
-void addToVectorSafely(std::vector<int> &vec, long long value)
-{
-    if (value > std::numeric_limits<int>::max() || value < std::numeric_limits<int>::min())
-    {
-        throw std::overflow_error("Value exceeds the limits of int");
-    }
-    vec.push_back(static_cast<int>(value));
 }
 
 /* easyfind.tpp */
