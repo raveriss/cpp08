@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 00:02:28 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/13 00:18:46 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/19 14:22:47 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,30 @@
 #define RETURN_FAILURE 1
 #define TEST_ARG "tester"
 #define STRING_COMPARE_SUCCESS 0
+
+/*
+    vector : C'est probablement le conteneur le plus utilisé.
+Il représente une séquence d'éléments qui peuvent être accédés directement
+par leur position (index). Les vectors permettent des insertions et
+suppressions rapides à la fin, mais peuvent être coûteux pour des opérations
+similaires au début ou au milieu.
+    deque (double-ended queue) : Semblable au vector, mais optimisé pour des
+insertions et suppressions rapides aux deux extrémités. Les performances pour
+accéder à des éléments au milieu sont généralement moins bonnes que celles des
+vectors.
+    list : Une liste doublement chaînée permettant des insertions et
+suppressions efficaces n'importe où dans la liste. Cependant, l'accès direct
+par index est lent car il nécessite un parcours séquentiel depuis le début ou
+la fin de la liste.
+    forward_list : Une liste simplement chaînée, offrant des performances
+légèrement meilleures que list pour certaines opérations, mais ne peut être
+parcourue que dans un sens.
+    array : Conteneur de taille fixe stockant une séquence d'éléments. 
+Sa taille doit être connue à la compilation. Offre des performances d'accès
+direct similaires à un tableau brut, mais avec les avantages de la STL.
+string : Spécialisé pour stocker des séquences de caractères, offre de
+nombreuses fonctions pour manipuler des chaînes de texte.
+*/
 
 /**
  * @brief Print the elements of a container
@@ -159,30 +183,6 @@ void printLargeContainer(const T& container)
     /* Print the closing bracket */
     std::cout << " ]" << std::endl;
 }
-
-/*
-    vector : C'est probablement le conteneur le plus utilisé.
-Il représente une séquence d'éléments qui peuvent être accédés directement
-par leur position (index). Les vectors permettent des insertions et
-suppressions rapides à la fin, mais peuvent être coûteux pour des opérations
-similaires au début ou au milieu.
-    deque (double-ended queue) : Semblable au vector, mais optimisé pour des
-insertions et suppressions rapides aux deux extrémités. Les performances pour
-accéder à des éléments au milieu sont généralement moins bonnes que celles des
-vectors.
-    list : Une liste doublement chaînée permettant des insertions et
-suppressions efficaces n'importe où dans la liste. Cependant, l'accès direct
-par index est lent car il nécessite un parcours séquentiel depuis le début ou
-la fin de la liste.
-    forward_list : Une liste simplement chaînée, offrant des performances
-légèrement meilleures que list pour certaines opérations, mais ne peut être
-parcourue que dans un sens.
-    array : Conteneur de taille fixe stockant une séquence d'éléments. 
-Sa taille doit être connue à la compilation. Offre des performances d'accès
-direct similaires à un tableau brut, mais avec les avantages de la STL.
-string : Spécialisé pour stocker des séquences de caractères, offre de
-nombreuses fonctions pour manipuler des chaînes de texte.
-*/
 
 /**
  * @brief Test the easyfind function with a present element
@@ -577,6 +577,77 @@ void testEasyFindMultipleOccurrences()
 }
 
 /**
+ * @brief Test adding a number greater than the maximum int value
+ */
+void testAddNumberBeyondIntMax()
+{
+    std::vector<int> vec;
+    vec.push_back(1);  // Ajouter un élément pour tester le find
+
+    /* Print the elements of the vector */
+    printContainer(vec);
+
+    try
+    {
+        easyfind(vec, static_cast<long long>(std::numeric_limits<int>::max()) + 1);
+        ASSERT_TEST(false, "Exception should be thrown when adding a number greater than max int value");
+    }
+    catch(const std::overflow_error& e)
+    {
+        std::cout << CYAN << "Caught exception: " << e.what() << NC << std::endl;
+        ASSERT_TEST(true, "Exception thrown as expected");
+    }
+    catch(const std::exception& e)
+    {
+        std::cout << CYAN << "Caught unexpected exception: " << e.what() << NC << std::endl;
+        ASSERT_TEST(false, "Unexpected exception type");
+    }
+}
+
+/**
+ * @brief Test adding a number less than the minimum int value
+ */
+// void testAddNumberBeyondIntMin()
+// {
+//     std::vector vec;
+//     try
+//     {
+//         sp.addNumber(static_cast<long long>(std::numeric_limits<int>::min()) - 1); // Utilisation de long long pour dépasser int
+//         ASSERT_TEST(false, "Exception should be thrown when adding a number less than min int value");
+//     }
+//     catch(const std::exception& e)
+//     {
+//         std::cout << "Caught exception: " << e.what() << std::endl;
+//         ASSERT_TEST(true, "Exception thrown as expected");
+//     }
+// }
+
+/**
+ * @brief Test adding INT_MAX and INT_MIN values
+ */
+// void testIntMaxAndIntMin()
+// {
+//     Span sp(2);
+//     sp.addNumber(std::numeric_limits<int>::max());
+//     sp.addNumber(std::numeric_limits<int>::min());
+    
+//     std::cout << sp.print() << std::endl;
+
+//     long long shortestSpan = sp.shortestSpan();
+//     long long longestSpan = sp.longestSpan();
+    
+//     std::cout << "Shortest span: " << shortestSpan << std::endl;
+//     std::cout << "Longest span: " << longestSpan << std::endl;
+
+//     // La différence entre INT_MAX et INT_MIN
+//     long long expectedSpan = static_cast<long long>(std::numeric_limits<int>::max()) - static_cast<long long>(std::numeric_limits<int>::min());
+
+//     // Comme la plus petite différence ne peut pas être plus grande que la plus grande différence, nous vérifions aussi cette condition.
+//     ASSERT_TEST(shortestSpan >= 0, "Shortest span should be non-negative");
+//     ASSERT_TEST(longestSpan == expectedSpan, "Longest span should handle INT_MAX and INT_MIN correctly");
+// }
+
+/**
  * @brief Main function
  */
 int main(int argc, char *argv[])
@@ -695,6 +766,10 @@ int main(int argc, char *argv[])
 
         /* Test the easyfind function with multiple occurrences of an element */
 		testEasyFindMultipleOccurrences();
+
+        std::cout << std::endl << MAGENTA << "TEST ADD NUMBER BEYOND INT MAX" << NC << std::endl;
+        /* Test adding a number greater than the maximum int value */
+        testAddNumberBeyondIntMax();
 	}
 	else
 	{

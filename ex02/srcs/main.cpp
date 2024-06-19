@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 16:44:41 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/18 20:22:27 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/19 14:53:11 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@
 
 /* Inclusion de la bibliothèque standard pour std::cstring */
 #include <cstring>
+
+/* Inclusion de la bibliothèque standard pour std::list */
+#include <list>
 
 /* Definitions of ANSI color codes for console output */
 #define GREY        "\033[0;30m"
@@ -456,6 +459,33 @@ void testPerformanceBalance()
     ASSERT_TEST(stack.size() == 1000, "Stack size should be 1000 after pushing another 500 elements");
 }
 
+
+/**
+ * @brief Test pushing a number greater than max int value
+ */ 
+void testPushWithCheck()
+{
+    std::cout << std::endl << MAGENTA << "TEST PUSH WITH CHECK" << NC << std::endl;
+    
+    MutantStack<int> stack;
+
+    try
+    {
+        stack.push_with_check(static_cast<long long>(std::numeric_limits<int>::max()) + 1);
+        ASSERT_TEST(false, "Exception should be thrown when pushing a number greater than max int value");
+    }
+    catch(const std::overflow_error& e)
+    {
+        std::cout << CYAN << "Caught exception: " << e.what() << NC << std::endl;
+        ASSERT_TEST(true, "Exception thrown as expected");
+    }
+    catch(const std::exception& e)
+    {
+        std::cout << "Caught unexpected exception: " << e.what() << std::endl;
+        ASSERT_TEST(false, "Unexpected exception type");
+    }
+}
+
 /**
  * @brief Run all tests
  */
@@ -473,9 +503,22 @@ void runTests()
     testExceptionHandling();
     testIntensiveUsage();
     testPerformanceBalance();
+    testPushWithCheck();
 }
 
-
+void printList(const std::list<int>& lst)
+{
+    std::cout << "[ ";
+    for (std::list<int>::const_iterator it = lst.begin(); it != lst.end(); ++it)
+    {
+        if (it != lst.begin())
+        {
+            std::cout << ", ";
+        }
+        std::cout << *it;
+    }
+    std::cout << " ]" << std::endl;
+}
 
 /**
  * @brief Main function
@@ -484,6 +527,10 @@ int main(int argc, char *argv[])
 {
     if (argc == NO_ARGUMENTS)
     {
+		std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */" << NC << std::endl;
+		std::cout << CYAN << "/*                                 MANDATORY                                  */" << NC << std::endl;
+		std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */\n" << NC << std::endl;
+
         /* Code pour les tests de base (équivalent au mode "MANDATORY") */
         MutantStack<int> mstack;
         mstack.push(5);
@@ -511,6 +558,38 @@ int main(int argc, char *argv[])
         }
 
         std::stack<int> s(mstack);
+
+        std::cout << MAGENTA << std::endl << "TEST AVEC STD::LIST USAGE" << NC << std::endl << std::endl;
+        std::list<int> lst;
+        lst.push_back(5);
+        lst.push_back(17);
+
+        /*  Devrait afficher 17 */
+        std::cout << lst.back() << std::endl;
+        lst.pop_back();
+        
+        /* Devrait afficher 5 */
+        std::cout << lst.size() << std::endl;
+        
+        lst.push_back(3);
+        lst.push_back(5);
+        lst.push_back(737);
+        lst.push_back(0);
+        
+        std::list<int>::iterator itlst = lst.begin();
+        std::list<int>::iterator itelst = lst.end();
+        ++itlst;
+        --itlst;
+        while (itlst != itelst)
+        {
+            std::cout << *itlst << std::endl;
+            ++itlst;
+        }
+        
+        std::list<int> lst2(lst);
+
+        std::cout << std::endl << "Liste:" << std::endl;
+        printList(lst2);
     }
     else if (argc == ARG_ONE && strcmp(argv[FIRST_ARGUMENT], TEST_ARG) == STRING_COMPARE_SUCCESS)
     {

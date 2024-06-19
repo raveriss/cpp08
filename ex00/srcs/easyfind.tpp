@@ -6,36 +6,51 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 18:02:56 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/18 19:55:20 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/19 13:24:22 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* Directive pour éviter les inclusions multiples d'un fichier d'en-tête */
 #pragma once
 
-/* Inclure les fichiers .hpp nécessaires */
-#include "../incs/easyfind.hpp"
-
-/* Inclure les fichiers de la STL nécessaires */
-#include <algorithm>
-
-/* Inclure les fichiers typeinfo pour la gestion des types */
-#include <typeinfo>
-
 /**
  * @brief Fonction qui retourne un itérateur sur la première occurrence de la valeur recherchée
  */
+#include <algorithm>
+#include <typeinfo>
+#include <stdexcept>
+#include <limits>
+#include <iostream>
+
 template <typename T>
-typename T::iterator easyfind(T &container, int value)
+typename T::iterator easyfind(T &container, long long value)
 {
     /* Vérifier que le conteneur contient des int */
     if (typeid(typename T::value_type) != typeid(int))
         throw std::runtime_error("Le conteneur doit contenir des valeurs de type int.");
 
-    typename T::iterator it = std::find(container.begin(), container.end(), value);
+    /* Vérifier si la valeur est dans les limites d'un int */
+    if (value > std::numeric_limits<int>::max() || value < std::numeric_limits<int>::min())
+        throw std::overflow_error("Value exceeds the limits of int");
+
+    int intValue = static_cast<int>(value);
+    typename T::iterator it = std::find(container.begin(), container.end(), intValue);
     if (it == container.end())
         throw std::runtime_error("Value not found");
     return it;
+}
+
+
+/**
+ * @brief Ajoute un élément dans un vecteur en vérifiant les limites d'un int
+ */
+void addToVectorSafely(std::vector<int> &vec, long long value)
+{
+    if (value > std::numeric_limits<int>::max() || value < std::numeric_limits<int>::min())
+    {
+        throw std::overflow_error("Value exceeds the limits of int");
+    }
+    vec.push_back(static_cast<int>(value));
 }
 
 /* easyfind.tpp */

@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 15:28:55 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/18 20:23:11 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/19 13:57:40 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,21 @@ MutantStack<T>::~MutantStack()
 {}
 
 /**
- * @brief Constructeur par défaut
+ * @brief Retourne un itérateur au début de la stack
+ * 
+ * Utilise le membre protégé `c` de `std::stack` pour appeler 
+ * la méthode `begin` du conteneur sous-jacent.
+ * `c` est une instance de la classe sous-jacente de `std::stack`, 
+ * par défaut c'est `std::deque`.
+ * 
+ * Contenu de `c` :
+ * - Éléments de la pile : `c` contient tous les éléments stockés dans la pile `std::stack`.
+ * - Structure de données : Par défaut, `c` est une instance de `std::deque<T>`, permettant des insertions et suppressions efficaces aux deux extrémités.
+ * 
+ * Utilité de `c` :
+ * - Gestion des éléments : `c` gère les éléments de la pile et permet des opérations d'accès, d'insertion et de suppression.
+ * - Méthodes d'itération : Grâce à `c`, on peut obtenir des itérateurs pour parcourir les éléments du conteneur sous-jacent.
+ * - Flexibilité : `c` peut être personnalisé pour utiliser différents types de conteneurs compatibles.
  */
 template <typename T>
 typename MutantStack<T>::iterator MutantStack<T>::begin()
@@ -60,10 +74,20 @@ typename MutantStack<T>::iterator MutantStack<T>::begin()
 }
 
 /**
+ * @brief Renvoie un itérateur pointant après le dernier élément de la pile
+ */
+template <typename T>
+typename MutantStack<T>::iterator MutantStack<T>::end()
+{
+    return std::stack<T>::c.end();
+}
+
+/**
  * @brief Print the Container
  */
 template <typename T>
-void MutantStack<T>::printContainer() const {
+void MutantStack<T>::printContainer() const
+{
     typename MutantStack<T>::container_type::const_iterator it = this->c.begin();
     std::cout << "[ ";
     if (it != this->c.end())
@@ -82,7 +106,8 @@ void MutantStack<T>::printContainer() const {
  * @brief Print the Large Container
  */
 template <typename T>
-void MutantStack<T>::printLargeContainer() const {
+void MutantStack<T>::printLargeContainer() const
+{
     const_iterator it = this->c.begin();
     size_t size = this->c.size();
     size_t i = 0;
@@ -97,7 +122,9 @@ void MutantStack<T>::printLargeContainer() const {
             if (it != --this->c.end())
                 std::cout << ", ";
         }
-    } else {
+    }
+    else
+    {
         for (i = 0; i < 3 && it != this->c.end(); ++i, ++it)
         {
             std::cout << *it << ", ";
@@ -120,15 +147,6 @@ void MutantStack<T>::printLargeContainer() const {
     }
 
     std::cout << " ]" << std::endl;
-}
-
-/**
- * @brief Renvoie un itérateur pointant après le dernier élément de la pile
- */
-template <typename T>
-typename MutantStack<T>::iterator MutantStack<T>::end()
-{
-    return std::stack<T>::c.end();
 }
 
 /**
@@ -180,6 +198,16 @@ const T& MutantStack<T>::top() const
     if (this->empty())
         throw std::runtime_error("Cannot access top of an empty stack");
     return std::stack<T>::top();
+}
+
+template <typename T>
+void MutantStack<T>::push_with_check(long long value)
+{
+    if (value > std::numeric_limits<int>::max() || value < std::numeric_limits<int>::min())
+    {
+        throw std::overflow_error("Value exceeds the limits of int");
+    }
+    this->push(static_cast<int>(value));
 }
 
 /* MutantStack.tpp */

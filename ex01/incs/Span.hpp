@@ -6,23 +6,35 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 18:38:45 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/18 17:21:46 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/19 10:09:04 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* Directive pour éviter les inclusions multiples d'un fichier d'en-tête */
 #pragma once
 
-/* Inclure les fichiers de conteneurs vector */
+/* 
+ * Inclure <vector> pour utiliser std::vector
+ * nécessaire pour stocker les données dans la classe Span
+ */
 #include <vector>
 
-/* Inclure les fichiers de conteneurs algorithm */
+/* 
+ * Inclure <algorithm> pour utiliser des fonctions telles que std::min_element et std::max_element
+ * nécessaire pour les méthodes shortestSpan et longestSpan
+ */
 #include <algorithm>
 
-/* Inclure les fichiers exception */
+/* 
+ * Inclure <exception> pour utiliser std::exception
+ * nécessaire pour définir la classe d'exception personnalisée SpanException
+ */
 #include <exception>
 
-/* Inclure les fichiers string */
+/* 
+ * Inclure <string> pour utiliser std::string
+ * nécessaire pour les méthodes print et printLargeContainer
+ */
 #include <string>
 
 /**
